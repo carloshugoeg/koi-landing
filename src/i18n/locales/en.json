@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "services": "Services",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "contact": "Contact",
+    "contactUs": "Contact Us"
+  },
+  "hero": {
+    "badge": "Building for our people",
+    "heading": "Elevating local business through <gradient>intelligent software.</gradient>",
+    "subheading": "We build bespoke SaaS and automation platforms tailored to streamline your operations, save time, and dramatically boost your sales.",
+    "cta": "Start your project",
+    "ctaSecondary": "Explore our solutions"
+  },
+  "logoCarousel": {
+    "caption": "Trusted by local businesses & agencies"
+  },
+  "bento": {
+    "heading": "SaaS built for your industry.",
+    "subheading": "Powerful, dedicated software platforms customized to the unique needs of local businesses and entrepreneurial workflows.",
+    "discoverPlatform": "Discover Platform",
+    "spaTitle": "SpaApp",
+    "spaDescription": "End-to-end management tools designed exclusively for spa operations. Streamline bookings, manage staff schedules, and handle client data securely in one place.",
+    "nutritionTitle": "KoiNutrition",
+    "nutritionDescription": "A comprehensive platform for dietitians to manage patient profiles, create custom meal plans, and track progress seamlessly.",
+    "restaurantTitle": "Restaurant OS",
+    "restaurantDescription": "Digital presence and operational management built for the modern restaurant. Boost visibility and handle orders gracefully.",
+    "iximchatTitle": "IximChat",
+    "iximchatDescription": "An AI-powered digital assistant for agriculture and farming cooperatives. Record data, analyze crop trends, and make decisions directly from WhatsApp—no new apps required."
+  },
+  "automatizations": {
+    "label": "Automatizations",
+    "heading": "We connect the dots so your business runs on autopilot.",
+    "chatbotsTitle": "Intelligent Chatbots",
+    "chatbotsDescription": "Deploy 24/7 AI agents that handle customer inquiries, book appointments, and close sales seamlessly on WhatsApp, Instagram, and web.",
+    "omnichannelTitle": "Omnichannel Sync",
+    "omnichannelDescription": "Unify your communications. Connect WhatsApp, Messenger, and Instagram DMs into a single dashboard so no lead ever slips through.",
+    "crmTitle": "Funnels & CRM",
+    "crmDescription": "Automate your entire sales pipeline. From lead generation to nurturing sequences, we build precise workflows that convert visitors into loyal clients."
+  },
+  "philosophy": {
+    "badge": "Our Core Belief",
+    "quote": "\"Technology should empower the local community, not overwhelm it.\"",
+    "heading": "We are building for <red>our people.</red>",
+    "p1": "At Koi Software, we don't believe in generic, one-size-fits-all solutions. Our foundation is built on deep integration with local businesses and entrepreneurs.",
+    "p2": "You manage the people, we manage the data. By streamlining operations and opening powerful digital channels, we help you provide superior service to your clients.",
+    "p3": "When local businesses thrive, the whole community scales. That's why we build software that is accessible, beautiful, and relentlessly reliable."
+  },
+  "consulting": {
+    "heading": "Beyond the platform.",
+    "subheading": "Need something completely unique? Our custom consulting and development services bridge the gap between where you are and where you want to go.",
+    "accessoriesTitle": "Software Accessories",
+    "accessoriesDescription": "Custom bridges, webhooks, and add-ons built specifically for your existing software infrastructure.",
+    "optimizationTitle": "System Optimization",
+    "optimizationDescription": "We analyze your technical debt and workflows to dramatically speed up and secure your current operations.",
+    "tailoredTitle": "Tailored Software",
+    "tailoredDescription": "Zero compromises. Complete architectural design and implementation of bespoke software for distinct business models.",
+    "cta": "Discuss a custom project"
+  },
+  "footer": {
+    "heading": "Ready to scale your business?",
+    "subheading": "Drop us a line and let's discuss how customized software and automation can accelerate your growth.",
+    "contactUs": "Contact Us",
+    "solutions": "Solutions",
+    "spaAdmin": "Spa Admin",
+    "nutrition": "Nutrition",
+    "restaurants": "Restaurants",
+    "company": "Company",
+    "aboutUs": "About Us",
+    "services": "Services",
+    "careers": "Careers",
+    "connect": "Connect",
+    "tagline": "Designed and built locally, for our people."
+  }
+}

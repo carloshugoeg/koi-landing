@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --color-koi-red: #e92010;
+  --color-koi-dark: #0f0f11;
+  --color-koi-overlay: #1a1a1c;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+@layer base {
+  body {
+    @apply bg-koi-dark text-white font-sans antialiased selection:bg-koi-red selection:text-white;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .animate-marquee {
+    animation: marquee 80s linear infinite;
+  }
+}
