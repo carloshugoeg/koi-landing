@@ -9,7 +9,7 @@ export const PhilosophySection = () => {
             {/* Abstract Background Element */}
             <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-koi-red/10 via-transparent to-transparent opacity-50 pointer-events-none rounded-bl-[100%]" />
 
-            <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-16 relative z-10">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-8 md:gap-16 relative z-10">
                 <div className="md:w-1/2">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
