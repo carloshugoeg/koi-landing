@@ -35,7 +35,7 @@ export const ConsultingSection = () => {
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
                             {t('consulting.heading')}
                         </h2>
-                        <p className="text-xl text-white/50">
+                        <p className="text-base md:text-xl text-white/50">
                             {t('consulting.subheading')}
                         </p>
                     </div>
