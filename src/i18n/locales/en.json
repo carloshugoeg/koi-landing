@@ -114,9 +114,7 @@
   },
   "cta": {
     "heading": "Shall we build something great for your business?",
-    "subheading": "Tell us what you need and we'll come back with concrete ideas.",
-    "whatsapp": "Message us on WhatsApp",
-    "emailIntro": "or by email:"
+    "subheading": "Tell us what you need and we'll come back with concrete ideas."
   },
   "footer": {
     "solutions": "Solutions",
@@ -134,7 +132,6 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "changeLang": "Change language",
-    "mainNav": "Main navigation",
-    "whatsappMessage": "Hi Koi, I'd like to talk about a project."
+    "mainNav": "Main navigation"
   }
 }

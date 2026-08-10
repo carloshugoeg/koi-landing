@@ -1,14 +1,13 @@
 import { m } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Section } from '../primitives/Section';
 import { Button } from '../primitives/Button';
 import { fadeRise, staggerParent, viewportOnce } from '../../lib/motion';
-import { SITE, whatsappHref } from '../../lib/site';
+import { SITE } from '../../lib/site';
 
 export const FinalCta = () => {
   const { t } = useTranslation();
-  const hasWhatsapp = SITE.whatsapp.length > 0;
 
   return (
     <Section id="contact" labelledBy="contact-heading" className="bg-koi-black overflow-hidden">
@@ -34,25 +33,11 @@ export const FinalCta = () => {
         <m.p variants={fadeRise} className="mt-5 text-lead text-white/70 max-w-xl text-balance">
           {t('cta.subheading')}
         </m.p>
-        <m.div variants={fadeRise} className="mt-10 flex flex-col items-center gap-5">
-          {hasWhatsapp ? (
-            <>
-              <Button href={whatsappHref(t('a11y.whatsappMessage'))} external className="px-9 py-4">
-                <MessageCircle size={18} aria-hidden="true" />
-                {t('cta.whatsapp')}
-              </Button>
-              <p className="text-body-sm text-white/60">
-                {t('cta.emailIntro')}{' '}
-                <a href={`mailto:${SITE.email}`} className="text-white underline underline-offset-4 hover:text-koi-red-300 transition-colors duration-150">
-                  {SITE.email}
-                </a>
-              </p>
-            </>
-          ) : (
-            <Button href={`mailto:${SITE.email}`} className="px-9 py-4">
-              {SITE.email}
-            </Button>
-          )}
+        <m.div variants={fadeRise} className="mt-10">
+          <Button href={`mailto:${SITE.email}`} className="px-9 py-4">
+            <Mail size={18} aria-hidden="true" />
+            {SITE.email}
+          </Button>
         </m.div>
       </m.div>
     </Section>

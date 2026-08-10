@@ -114,9 +114,7 @@
   },
   "cta": {
     "heading": "¿Construimos algo grande para tu negocio?",
-    "subheading": "Cuéntanos qué necesitas y te respondemos con ideas concretas.",
-    "whatsapp": "Escríbenos por WhatsApp",
-    "emailIntro": "o por correo:"
+    "subheading": "Cuéntanos qué necesitas y te respondemos con ideas concretas."
   },
   "footer": {
     "solutions": "Soluciones",
@@ -134,7 +132,6 @@
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
     "changeLang": "Cambiar idioma",
-    "mainNav": "Navegación principal",
-    "whatsappMessage": "Hola Koi, quiero hablar de un proyecto."
+    "mainNav": "Navegación principal"
   }
 }

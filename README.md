@@ -49,7 +49,4 @@ Note on SEO: both languages are served at one URL, so `hreflang` is intentionall
 
 ## Owner configuration
 
-`src/lib/site.ts` holds the values that need real data:
-
-- `whatsapp` — international-format number; while empty, the final CTA shows the email button instead
-- `social.instagram` / `social.linkedin` — footer links render only when set
+`src/lib/site.ts` holds the contact endpoints. Contact is email-only by design; `social.instagram` / `social.linkedin` footer links render only when set.
