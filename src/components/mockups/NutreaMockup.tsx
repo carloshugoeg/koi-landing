@@ -34,7 +34,7 @@ export default function NutreaMockup() {
         }
       >
         <WindowChrome title="Nutrea — Expediente" />
-        <div className="flex-1 min-h-0 p-[1.1em]">
+        <div className="flex-1 min-h-0 p-[1.1em] flex flex-col">
           {/* Patient header */}
           <div className="flex items-center gap-[0.8em] mb-[1em]">
             <span className="flex items-center justify-center w-[2.4em] h-[2.4em] rounded-full bg-gradient-to-br from-koi-red-500/40 to-koi-ember/40 text-[0.9em] font-bold text-white">
@@ -49,7 +49,7 @@ export default function NutreaMockup() {
             </span>
           </div>
 
-          <div className="flex gap-[1em]">
+          <div className="flex gap-[1em] flex-1 min-h-0">
             {/* Weekly plan */}
             <div className="flex-[1.3] rounded-[0.7em] bg-white/[0.03] border border-white/8 p-[0.8em]">
               <p className="text-[0.75em] font-semibold text-white/60 uppercase tracking-wide mb-[0.7em]">Plan semanal</p>
