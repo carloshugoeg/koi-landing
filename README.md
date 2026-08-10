@@ -1,73 +1,52 @@
-# React + TypeScript + Vite
+# Koi Software — Landing
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketing site for [koisoftware.com](https://koisoftware.com): a single-page, Spanish-first landing for a software studio serving local businesses in Guatemala. The page doubles as proof of design capability — the featured "mockups" are live DOM recreations of real products (Infinito POS, KoiCRM, Nutrea, SpaApp) rendered with container-scaled layouts and spring-driven 3D tilt.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+React 19 · TypeScript (strict) · Vite 7 · Tailwind CSS v4 (`@tailwindcss/vite`, tokens in `src/index.css` `@theme`) · framer-motion 12 (LazyMotion, `m` components only) · i18next (ES default, EN toggle)
 
-## React Compiler
+## Commands
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Vite dev server with HMR |
+| `npm run build` | Type-check (`tsc -b`) + production build |
+| `npm run preview` | Serve the production build locally |
+| `npm run lint` | ESLint |
+| `npm run optimize:logos` | Regenerate `public/logos/*.webp` from PNG sources (sharp) |
+| `node scripts/screenshots.mjs` | Playwright screenshot matrix (viewports × languages × sections) |
 
-## Expanding the ESLint configuration
+`postinstall` runs `scripts/sync-fonts.mjs`, copying the variable-font woff2 files from `@fontsource-variable/*` into `public/fonts/` so `index.html` can preload them from stable URLs.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Architecture
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Single page, composed in `src/App.tsx`:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+Navbar → Hero → LogoMarquee → WorkSection (#work) → AutomationSection (#automations)
+→ PhilosophySection (#about) → ServicesSection (#services) → FinalCta (#contact) → Footer
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- `src/components/primitives/` — `Section`, `SectionHeading`, `Button`, `Chip`
+- `src/components/work/` — case-study rows; each mockup is a lazy chunk mounted just before it scrolls into view
+- `src/components/mockups/` — `MockupFrame` (container-query scaling, pointer-tilt springs, `FloatCard` parallax depth) + the five product mockups
+- `src/lib/motion.ts` — shared spring presets and reveal variants (critically damped by default)
+- `src/lib/site.ts` — contact/social endpoints; links render only when configured
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Motion & accessibility
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- All animation flows through `LazyMotion strict` + `MotionConfig reducedMotion="user"`; decorative loops (marquee, particle canvas, toasts) also stop under `prefers-reduced-motion`.
+- The hero's particle canvas pauses whenever it is off-screen or the tab is hidden, and renders DPR-correct.
+- Glass surfaces fall back to solid under `prefers-reduced-transparency` / gain borders under `prefers-contrast: more`.
+- `<html lang>` follows the active language (set in `src/i18n/config.ts`).
+
+## i18n
+
+Spanish is the default and primary voice (`fallbackLng: 'es'`, localStorage-only detection under the `koi-lang` key). English is opt-in via the navbar toggle. Copy lives in `src/i18n/locales/{es,en}.json` — write Spanish first, then translate.
+
+Note on SEO: both languages are served at one URL, so `hreflang` is intentionally omitted (incorrect hreflang is worse than none). If languages ever get dedicated routes (e.g. `/en`), add hreflang alternates then.
+
+## Owner configuration
+
+`src/lib/site.ts` holds the contact endpoints. Contact is email-only by design; `social.instagram` / `social.linkedin` footer links render only when set.

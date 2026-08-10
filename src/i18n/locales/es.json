@@ -1,43 +1,83 @@
 {
   "nav": {
+    "work": "Trabajo",
     "services": "Servicios",
     "about": "Nosotros",
-    "portfolio": "Portafolio",
-    "contact": "Contacto",
-    "contactUs": "Contáctanos"
+    "cta": "Hablemos"
   },
   "hero": {
     "badge": "Construyendo para nuestra gente",
-    "heading": "Impulsando negocios locales con <gradient>software inteligente.</gradient>",
+    "heading": "Construimos el software que <accent>tu negocio merece.</accent>",
     "subheading": "Creamos plataformas SaaS y de automatización a la medida para optimizar tus operaciones, ahorrar tiempo y potenciar tus ventas.",
     "cta": "Inicia tu proyecto",
-    "ctaSecondary": "Explora nuestras soluciones"
+    "ctaSecondary": "Mira nuestro trabajo"
   },
-  "logoCarousel": {
+  "clients": {
     "caption": "La confianza de negocios locales y agencias"
   },
-  "bento": {
-    "heading": "SaaS diseñado para tu industria.",
-    "subheading": "Plataformas de software dedicadas y potentes, personalizadas para las necesidades únicas de negocios locales y flujos de trabajo empresariales.",
-    "discoverPlatform": "Descubrir Plataforma",
-    "spaTitle": "SpaApp",
-    "spaDescription": "Herramientas de gestión integral diseñadas exclusivamente para operaciones de spa. Optimiza reservas, administra horarios del personal y maneja datos de clientes de forma segura en un solo lugar.",
-    "nutritionTitle": "KoiNutrition",
-    "nutritionDescription": "Una plataforma integral para nutriólogos que permite gestionar perfiles de pacientes, crear planes de alimentación personalizados y dar seguimiento al progreso sin complicaciones.",
-    "restaurantTitle": "Restaurant OS",
-    "restaurantDescription": "Presencia digital y gestión operativa diseñada para el restaurante moderno. Aumenta tu visibilidad y gestiona pedidos con elegancia.",
-    "iximchatTitle": "IximChat",
-    "iximchatDescription": "Un asistente digital impulsado por IA para cooperativas agrícolas. Registra datos, analiza tendencias de cultivos y toma decisiones directamente desde WhatsApp, sin necesidad de nuevas apps."
+  "work": {
+    "label": "Portafolio",
+    "heading": "Trabajo que habla por sí solo.",
+    "lead": "Sistemas reales, construidos a la medida, operando negocios todos los días.",
+    "pos": {
+      "label": "Punto de venta",
+      "title": "Infinito POS",
+      "headline": "El punto de venta que corre el restaurante completo.",
+      "body": "Comandas a cocina, control de mesas y cierre de caja en un solo sistema. Reemplazó tickets escritos a mano y hojas de cálculo en la operación diaria.",
+      "tag1": "Restaurantes",
+      "tag2": "Tiempo real",
+      "tag3": "Caja y reportes"
+    },
+    "crm": {
+      "label": "CRM y ventas",
+      "title": "KoiCRM",
+      "headline": "Cada cliente, cada conversación, en un solo lugar.",
+      "body": "Pipeline visual y seguimiento automático para equipos que vendían desde WhatsApp y cuadernos. Nada se pierde, todo se atiende.",
+      "tag1": "Pipeline visual",
+      "tag2": "Seguimiento",
+      "tag3": "WhatsApp"
+    },
+    "nutrea": {
+      "label": "Salud y nutrición",
+      "title": "Nutrea",
+      "headline": "La consulta nutricional, sin papeleo.",
+      "body": "Expedientes, planes alimenticios y progreso del paciente en una sola plataforma, diseñada junto a profesionales en consulta real.",
+      "tag1": "Expedientes",
+      "tag2": "Planes alimenticios",
+      "tag3": "Progreso"
+    },
+    "spa": {
+      "label": "Bienestar",
+      "title": "SpaApp",
+      "headline": "Operaciones de spa sin fricción.",
+      "body": "Agenda por cabina y terapeuta, reservas y el pulso del día en una sola pantalla. La recepción respira y el equipo siempre sabe qué sigue.",
+      "tag1": "Agenda",
+      "tag2": "Reservas",
+      "tag3": "Cabinas"
+    }
   },
-  "automatizations": {
-    "label": "Automatizaciones",
+  "automations": {
+    "label": "Automatización e IA",
     "heading": "Conectamos los puntos para que tu negocio funcione en piloto automático.",
-    "chatbotsTitle": "Chatbots Inteligentes",
-    "chatbotsDescription": "Despliega agentes de IA 24/7 que atienden consultas, agendan citas y cierran ventas en WhatsApp, Instagram y web.",
-    "omnichannelTitle": "Sincronización Omnicanal",
-    "omnichannelDescription": "Unifica tus comunicaciones. Conecta WhatsApp, Messenger e Instagram DMs en un solo panel para que ningún lead se escape.",
-    "crmTitle": "Embudos y CRM",
-    "crmDescription": "Automatiza todo tu pipeline de ventas. Desde la generación de leads hasta secuencias de nurturing, construimos flujos precisos que convierten visitantes en clientes leales."
+    "chatbots": {
+      "title": "Chatbots Inteligentes",
+      "body": "Despliega agentes de IA 24/7 que atienden consultas, agendan citas y cierran ventas en WhatsApp, Instagram y web."
+    },
+    "omnichannel": {
+      "title": "Sincronización Omnicanal",
+      "body": "Unifica tus comunicaciones. Conecta WhatsApp, Messenger e Instagram DMs en un solo panel para que ningún lead se escape."
+    },
+    "funnels": {
+      "title": "Embudos y CRM",
+      "body": "Automatiza todo tu pipeline de ventas. Desde la generación de leads hasta secuencias de nurturing, construimos flujos precisos que convierten visitantes en clientes leales."
+    },
+    "iximchat": {
+      "live": "En producción",
+      "title": "IximChat",
+      "headline": "IximChat está vivo: IA por WhatsApp para el agro.",
+      "body": "Un asistente digital impulsado por IA para cooperativas agrícolas. Registra datos, analiza tendencias de cultivos y toma decisiones directamente desde WhatsApp, sin necesidad de nuevas apps.",
+      "visit": "Visitar IximChat"
+    }
   },
   "philosophy": {
     "badge": "Nuestra Creencia Fundamental",
@@ -47,30 +87,51 @@
     "p2": "Tú gestionas a las personas, nosotros gestionamos los datos. Al optimizar operaciones y abrir canales digitales poderosos, te ayudamos a brindar un servicio superior a tus clientes.",
     "p3": "Cuando los negocios locales prosperan, toda la comunidad crece. Por eso construimos software accesible, hermoso e inquebrantablemente confiable."
   },
-  "consulting": {
+  "services": {
     "heading": "Más allá de la plataforma.",
     "subheading": "¿Necesitas algo completamente único? Nuestros servicios de consultoría y desarrollo a medida cierran la brecha entre donde estás y donde quieres llegar.",
-    "accessoriesTitle": "Accesorios de Software",
-    "accessoriesDescription": "Puentes personalizados, webhooks y complementos construidos específicamente para tu infraestructura de software existente.",
-    "optimizationTitle": "Optimización de Sistemas",
-    "optimizationDescription": "Analizamos tu deuda técnica y flujos de trabajo para acelerar y asegurar dramáticamente tus operaciones actuales.",
-    "tailoredTitle": "Software a la Medida",
-    "tailoredDescription": "Sin compromisos. Diseño arquitectónico completo e implementación de software a la medida para modelos de negocio únicos.",
-    "cta": "Discutir un proyecto personalizado"
+    "accessories": {
+      "title": "Accesorios de Software",
+      "body": "Puentes personalizados, webhooks y complementos construidos específicamente para tu infraestructura de software existente."
+    },
+    "optimization": {
+      "title": "Optimización de Sistemas",
+      "body": "Analizamos tu deuda técnica y flujos de trabajo para acelerar y asegurar dramáticamente tus operaciones actuales."
+    },
+    "tailored": {
+      "title": "Software a la Medida",
+      "body": "Sin compromisos. Diseño arquitectónico completo e implementación de software a la medida para modelos de negocio únicos."
+    },
+    "process": {
+      "label": "Cómo trabajamos",
+      "step1Title": "Descubrimiento",
+      "step1Body": "Conocemos tu operación en persona, no por formulario.",
+      "step2Title": "Diseño y construcción",
+      "step2Body": "Iteramos contigo sobre software real, no maquetas.",
+      "step3Title": "Acompañamiento",
+      "step3Body": "Seguimos cerca después del lanzamiento, siempre."
+    }
+  },
+  "cta": {
+    "heading": "¿Construimos algo grande para tu negocio?",
+    "subheading": "Cuéntanos qué necesitas y te respondemos con ideas concretas."
   },
   "footer": {
-    "heading": "¿Listo para escalar tu negocio?",
-    "subheading": "Escríbenos y hablemos de cómo el software personalizado y la automatización pueden acelerar tu crecimiento.",
-    "contactUs": "Contáctanos",
     "solutions": "Soluciones",
-    "spaAdmin": "Spa Admin",
-    "nutrition": "Nutrición",
-    "restaurants": "Restaurantes",
+    "portfolio": "Portafolio",
+    "automation": "Automatización",
     "company": "Empresa",
     "aboutUs": "Nosotros",
     "services": "Servicios",
-    "careers": "Carreras",
+    "contact": "Contacto",
     "connect": "Conecta",
     "tagline": "Diseñado y construido localmente, para nuestra gente."
+  },
+  "a11y": {
+    "skipToContent": "Saltar al contenido",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "changeLang": "Cambiar idioma",
+    "mainNav": "Navegación principal"
   }
 }

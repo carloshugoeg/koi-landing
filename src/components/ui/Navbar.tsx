@@ -1,101 +1,164 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { cn } from '../../lib/utils';
+import { spring } from '../../lib/motion';
+import { KoiMark } from './KoiMark';
+
+const NAV_LINKS = [
+  { key: 'nav.work', href: '#work' },
+  { key: 'nav.services', href: '#services' },
+  { key: 'nav.about', href: '#about' },
+] as const;
+
+const LanguageToggle = ({ className }: { className?: string }) => {
+  const { i18n, t } = useTranslation();
+  const current = i18n.resolvedLanguage ?? 'es';
+
+  return (
+    <div
+      role="group"
+      aria-label={t('a11y.changeLang')}
+      className={cn('flex items-center rounded-full border border-white/15 p-0.5', className)}
+    >
+      {(['es', 'en'] as const).map((lng) => (
+        <button
+          key={lng}
+          onClick={() => i18n.changeLanguage(lng)}
+          aria-pressed={current === lng}
+          className={cn(
+            'px-2.5 py-1 rounded-full text-caption font-semibold uppercase transition-colors duration-150',
+            current === lng ? 'bg-white/15 text-white' : 'text-white/60 hover:text-white',
+          )}
+        >
+          {lng}
+        </button>
+      ))}
+    </div>
+  );
+};
 
 export const Navbar = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const { t, i18n } = useTranslation();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
-    const toggleLanguage = () => {
-        i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es');
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const scrolled = window.scrollY > 20;
+        setIsScrolled((prev) => (prev === scrolled ? prev : scrolled));
+        ticking = false;
+      });
     };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    useEffect(() => {
-        let ticking = false;
-        const handleScroll = () => {
-            if (ticking) return;
-            ticking = true;
-            requestAnimationFrame(() => {
-                const scrolled = window.scrollY > 20;
-                setIsScrolled(prev => prev === scrolled ? prev : scrolled);
-                ticking = false;
-            });
-        };
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
 
-    return (
-        <motion.nav
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className={cn(
-                'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out px-6 md:px-12',
-                isScrolled ? 'py-4 bg-koi-dark/80 backdrop-blur-lg border-b border-white/5' : 'py-6 bg-transparent'
-            )}
+  return (
+    <m.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={spring.gentle}
+      className={cn(
+        'fixed top-0 left-0 right-0 z-50 transition-[padding,background-color] duration-300',
+        isScrolled ? 'py-3 glass-nav' : 'py-5 bg-transparent',
+      )}
+    >
+      {/* Scroll-edge hairline instead of a hard border */}
+      <div
+        aria-hidden="true"
+        className={cn(
+          'absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent transition-opacity duration-300',
+          isScrolled ? 'opacity-100' : 'opacity-0',
+        )}
+      />
+      <nav aria-label={t('a11y.mainNav')} className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-12">
+        <a href="#main" className="flex items-center gap-2.5 text-white">
+          <KoiMark />
+          <span className="text-body-sm font-bold tracking-[0.06em] uppercase">Koi Software</span>
+        </a>
+
+        <div className="hidden md:flex items-center gap-7">
+          {NAV_LINKS.map(({ key, href }) => (
+            <a
+              key={href}
+              href={href}
+              className="text-body-sm font-medium text-white/70 hover:text-white transition-colors duration-150"
+            >
+              {t(key)}
+            </a>
+          ))}
+          <LanguageToggle />
+          <a
+            href="#contact"
+            className="px-5 py-2.5 rounded-full text-body-sm font-semibold bg-gradient-to-r from-koi-red-500 to-koi-ember text-white shadow-glow-red hover:brightness-110 transition-[filter] duration-150"
+          >
+            {t('nav.cta')}
+          </a>
+        </div>
+
+        <button
+          className="md:hidden text-white p-1 -mr-1"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-label={menuOpen ? t('a11y.closeMenu') : t('a11y.openMenu')}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
         >
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
-                {/* Logo */}
-                <div className="flex items-center gap-2">
-                    <span className="text-xl font-bold tracking-tight text-white uppercase">
-                        KOI SOFTWARE
-                    </span>
-                </div>
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </nav>
 
-                {/* Desktop Links */}
-                <div className="hidden md:flex items-center gap-8">
-                    <a href="#services" className="text-sm font-medium text-white/70 hover:text-white transition-colors">
-                        {t('nav.services')}
-                    </a>
-                    <a href="#about" className="text-sm font-medium text-white/70 hover:text-white transition-colors">
-                        {t('nav.about')}
-                    </a>
-                    <a href="#portfolio" className="text-sm font-medium text-white/70 hover:text-white transition-colors">
-                        {t('nav.portfolio')}
-                    </a>
-                    <button
-                        onClick={toggleLanguage}
-                        className="text-sm font-medium text-white/70 hover:text-white transition-colors"
-                    >
-                        {i18n.language === 'es' ? 'EN' : 'ES'}
-                    </button>
-                    <a
-                        href="mailto:info@koisoftware.com"
-                        className="px-5 py-2.5 text-sm font-medium bg-koi-red text-white rounded-full hover:bg-koi-red/90 transition-colors shadow-[0_0_15px_rgba(233,32,16,0.5)]"
-                    >
-                        {t('nav.contact')}
-                    </a>
-                </div>
-
-                {/* Mobile Menu Button */}
-                <button
-                    className="md:hidden text-white"
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                >
-                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+      <AnimatePresence>
+        {menuOpen && (
+          <m.div
+            id="mobile-menu"
+            initial={{ opacity: 0, scaleY: 0.9, y: -8 }}
+            animate={{ opacity: 1, scaleY: 1, y: 0 }}
+            exit={{ opacity: 0, scaleY: 0.95, y: -8, transition: { duration: 0.18 } }}
+            transition={spring.sheet}
+            className="md:hidden absolute top-full left-0 right-0 origin-top glass-nav border-b border-white/10 px-6 py-6 flex flex-col gap-5"
+          >
+            {NAV_LINKS.map(({ key, href }) => (
+              <a
+                key={href}
+                href={href}
+                onClick={() => setMenuOpen(false)}
+                className="text-lead font-medium text-white/85 hover:text-white"
+              >
+                {t(key)}
+              </a>
+            ))}
+            <div className="flex items-center justify-between pt-2">
+              <LanguageToggle />
+              <a
+                href="#contact"
+                onClick={() => setMenuOpen(false)}
+                className="px-5 py-2.5 rounded-full text-body-sm font-semibold bg-gradient-to-r from-koi-red-500 to-koi-ember text-white"
+              >
+                {t('nav.cta')}
+              </a>
             </div>
-
-            {/* Mobile Menu */}
-            {isMobileMenuOpen && (
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="absolute top-full left-0 right-0 bg-koi-dark border-b border-white/10 p-6 flex flex-col gap-4 md:hidden"
-                >
-                    <a href="#services" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white/80 hover:text-white">{t('nav.services')}</a>
-                    <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white/80 hover:text-white">{t('nav.about')}</a>
-                    <a href="#portfolio" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-white/80 hover:text-white">{t('nav.portfolio')}</a>
-                    <button onClick={() => { toggleLanguage(); setIsMobileMenuOpen(false); }} className="text-lg font-medium text-white/80 hover:text-white text-left">
-                        {i18n.language === 'es' ? 'EN' : 'ES'}
-                    </button>
-                    <a href="mailto:info@koisoftware.com" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-koi-red">{t('nav.contactUs')}</a>
-                </motion.div>
-            )}
-        </motion.nav>
-    );
+          </m.div>
+        )}
+      </AnimatePresence>
+    </m.header>
+  );
 };
