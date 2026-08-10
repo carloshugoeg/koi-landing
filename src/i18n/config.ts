@@ -13,9 +13,12 @@ i18n
       en: { translation: en },
       es: { translation: es },
     },
-    fallbackLng: 'en',
+    // Spanish is the primary voice; English only via the explicit toggle,
+    // persisted in localStorage — never auto-detected from the browser.
+    fallbackLng: 'es',
+    supportedLngs: ['es', 'en'],
     detection: {
-      order: ['localStorage', 'navigator'],
+      order: ['localStorage'],
       lookupLocalStorage: 'koi-lang',
       caches: ['localStorage'],
     },
@@ -23,5 +26,11 @@ i18n
       escapeValue: false,
     },
   });
+
+// Keep <html lang> in sync so screen readers switch voices with the content.
+document.documentElement.lang = i18n.resolvedLanguage ?? 'es';
+i18n.on('languageChanged', (lng) => {
+  document.documentElement.lang = lng;
+});
 
 export default i18n;
