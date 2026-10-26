@@ -96,7 +96,7 @@ test('whatsapp anchors keep the ink colors', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await ready(page);
   const ink = async (selector: string) =>
-    page.locator(selector).evaluate((node) => {
+    page.locator(selector).first().evaluate((node) => {
       const style = getComputedStyle(node);
       return { color: style.color, decoration: style.textDecorationLine };
     });
@@ -109,11 +109,11 @@ test('whatsapp anchors keep the ink colors', async ({ page }) => {
 
   await page.locator('#contacto').scrollIntoViewIfNeeded();
   expect(await ink('.c3 .big')).toEqual({ color: 'rgb(237, 231, 218)', decoration: 'none' });
-  expect(await ink('.c3 .row')).toMatchObject({ decoration: 'none' });
+  expect(await ink('.c3 .row')).toEqual({ color: 'rgb(237, 231, 218)', decoration: 'none' });
   await page.locator('.c3 .big').hover();
   expect(await ink('.c3 .big')).toEqual({ color: 'rgb(237, 231, 218)', decoration: 'none' });
   await page.locator('.c3 .row').first().hover();
-  expect(await ink('.c3 .row')).toMatchObject({ color: 'rgb(184, 50, 30)', decoration: 'none' });
+  await expect.poll(() => ink('.c3 .row')).toEqual({ color: 'rgb(184, 50, 30)', decoration: 'none' });
 });
 
 test('axe is clean on the page and inside a project dialog', async ({ page }) => {
