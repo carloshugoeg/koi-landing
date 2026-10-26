@@ -102,7 +102,8 @@ test('whatsapp anchors keep the ink colors', async ({ page }) => {
     });
 
   expect(await ink('.hero .cta')).toEqual({ color: 'rgb(18, 18, 18)', decoration: 'none' });
-  expect(await ink('.hero .cta i')).toMatchObject({ color: 'rgb(18, 18, 18)' });
+  const rule = await page.locator('.hero .cta i').evaluate((node) => getComputedStyle(node).backgroundColor);
+  expect(rule).toBe('rgb(18, 18, 18)');
   expect(await ink('nav a.talk')).toEqual({ color: 'rgb(18, 18, 18)', decoration: 'none' });
   expect(await ink('.ns2 .cta2')).toEqual({ color: 'rgb(18, 18, 18)', decoration: 'none' });
 
