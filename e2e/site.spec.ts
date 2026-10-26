@@ -237,6 +237,55 @@ test('project cards fit at 768 and keep the 375 and 1440 layouts', async ({ page
   expect(phoneSize).toBe('32px');
 });
 
+test('enso rings stay round from 600 to 900 and match 375 and 1440 outside it', async ({ page }) => {
+  const strokes = () =>
+    page.locator('.pjx .stk').evaluateAll((nodes) =>
+      nodes.map((node) => {
+        const element = node as HTMLElement;
+        const left = Number.parseFloat(element.style.left);
+        return {
+          width: element.offsetWidth,
+          height: element.offsetHeight,
+          left,
+          right: left + element.offsetWidth,
+          fit: getComputedStyle(element).objectFit,
+          transform: element.style.transform,
+        };
+      }),
+    );
+
+  await page.setViewportSize({ width: 768, height: 900 });
+  await ready(page);
+  for (const width of [600, 768, 900]) {
+    await page.setViewportSize({ width, height: 900 });
+    await expect.poll(async () => (await strokes())[0]?.width ?? 0).toBeLessThanOrEqual(width);
+    for (const stroke of await strokes()) {
+      expect(stroke.width).toBe(Math.min(880, width));
+      expect(stroke.height / stroke.width).toBeCloseTo(520 / 900, 2);
+      expect(stroke.left).toBeGreaterThanOrEqual(-1);
+      expect(stroke.right).toBeLessThanOrEqual(width + 1);
+      expect(stroke.fit).toBe('contain');
+      expect(stroke.transform.startsWith('rotate(')).toBe(true);
+    }
+  }
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect.poll(async () => (await strokes())[0]?.width ?? 0).toBe(880);
+  for (const stroke of await strokes()) {
+    expect(stroke.fit).toBe('fill');
+    expect(stroke.transform.startsWith('rotate(')).toBe(true);
+    expect(Math.abs(stroke.height - 880 * (520 / 900))).toBeLessThan(2);
+  }
+
+  await page.setViewportSize({ width: 375, height: 800 });
+  await expect.poll(async () => (await strokes())[0]?.transform ?? '').toMatch(/scale\(-1,\s*0?\.5\)/);
+  for (const stroke of await strokes()) {
+    expect(stroke.width).toBe(825);
+    expect(stroke.fit).toBe('fill');
+    expect(stroke.transform).toMatch(/^scale\(-1,\s*0?\.5\)/);
+  }
+});
+
 test('contacto focus rings match the nav and header links warm on hover', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await ready(page);
