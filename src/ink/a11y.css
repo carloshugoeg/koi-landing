@@ -30,12 +30,64 @@ body {
   transform: none;
 }
 
-nav a {
-  color: inherit;
+nav a,
+nav a:link,
+nav a:visited,
+nav a:hover,
+nav a:active,
+nav a:focus {
+  color: #121212;
   text-decoration: none;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+}
+
+/* Anchors with href pick up the browser's blue underline. These replaced inert labels. */
+a.cta:link,
+a.cta:visited,
+a.cta:hover,
+a.cta:active,
+a.cta:focus,
+.ns2 a.cta2:link,
+.ns2 a.cta2:visited,
+.ns2 a.cta2:hover,
+.ns2 a.cta2:active,
+.ns2 a.cta2:focus {
+  color: #121212;
+  text-decoration: none;
+}
+
+.ct a:link,
+.ct a:visited,
+.ct a:active,
+.ct a:focus {
+  color: inherit;
+  text-decoration: none;
+}
+
+.c3 a.big:link,
+.c3 a.big:visited,
+.c3 a.big:hover,
+.c3 a.big:active,
+.c3 a.big:focus,
+.c3 a.big:focus-visible {
+  color: #ede7da;
+  text-decoration: none;
+}
+
+.ct a.row:hover,
+.ct a.row:focus-visible {
+  color: #b8321e;
+  text-decoration: none;
+}
+
+.pm .inf a:link,
+.pm .inf a:visited,
+.pm .inf a:hover,
+.pm .inf a:focus {
+  color: #121212;
+  text-decoration: none;
 }
 
 nav a.brand {
