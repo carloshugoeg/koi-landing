@@ -87,8 +87,8 @@ a.cta:visited:hover {
 }
 
 .c3 a.big:focus-visible,
-.ct a.row:focus-visible {
-  outline: 2px solid #b8321e;
+.c3 a.row:focus-visible {
+  outline: 2px solid #d9553f;
   outline-offset: 4px;
 }
 

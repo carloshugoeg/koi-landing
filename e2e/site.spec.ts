@@ -187,6 +187,56 @@ test('project titles load Shippori Mincho 400 and the arrow is U+2192', async ({
   }
 });
 
+test('project cards fit at 768 and keep the 375 and 1440 layouts', async ({ page }) => {
+  const boxes = () =>
+    page.locator('.pjx .tx').evaluateAll((nodes) =>
+      nodes.map((node) => {
+        const box = node.getBoundingClientRect();
+        const title = node.querySelector('h3')?.textContent ?? '';
+        return { title, left: box.left, right: box.right, width: box.width };
+      }),
+    );
+
+  await page.setViewportSize({ width: 768, height: 900 });
+  await ready(page);
+  const tablet = await boxes();
+  expect(tablet.map((card) => card.title)).toEqual(['KoiPOS', 'KoiCRM', 'Koins', 'Nutrea']);
+  for (const card of tablet) {
+    expect(card.left).toBeGreaterThanOrEqual(0);
+    expect(card.right).toBeLessThanOrEqual(768);
+    expect(card.left).toBeLessThan(80);
+  }
+  const tags = await page.locator('.pjx li').evaluateAll((nodes) =>
+    nodes.map((node) => {
+      const box = node.getBoundingClientRect();
+      return { text: node.textContent ?? '', right: box.right, left: box.left };
+    }),
+  );
+  for (const tag of tags) {
+    expect(tag.left).toBeGreaterThanOrEqual(0);
+    expect(tag.right).toBeLessThanOrEqual(768);
+  }
+  expect(tags.some((tag) => tag.text.includes('Calendario'))).toBe(true);
+  expect(tags.some((tag) => tag.text.includes('Marca propia'))).toBe(true);
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await expect.poll(async () => (await boxes())[1]?.left ?? 0).toBeGreaterThan(700);
+  const desktop = await boxes();
+  expect(desktop[3]?.left).toBeGreaterThan(700);
+  expect(desktop[0]?.left).toBeLessThan(300);
+  for (const card of desktop) expect(card.right).toBeLessThanOrEqual(1440);
+
+  await page.setViewportSize({ width: 375, height: 800 });
+  await expect.poll(async () => (await boxes())[1]?.left ?? 999).toBeLessThan(40);
+  const phone = await boxes();
+  for (const card of phone) {
+    expect(card.left).toBeLessThan(40);
+    expect(card.right).toBeLessThanOrEqual(375);
+  }
+  const phoneSize = await page.locator('.pjx h3').first().evaluate((node) => getComputedStyle(node).fontSize);
+  expect(phoneSize).toBe('32px');
+});
+
 test('contacto focus rings match the nav and header links warm on hover', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await ready(page);
@@ -199,13 +249,14 @@ test('contacto focus rings match the nav and header links warm on hover', async 
       return { style: style.outlineStyle, width: style.outlineWidth, color: style.outlineColor };
     });
   };
-  const seal = { style: 'solid', width: '2px', color: 'rgb(184, 50, 30)' };
-  expect(await ring('nav a.talk')).toEqual(seal);
+  const onLight = { style: 'solid', width: '2px', color: 'rgb(184, 50, 30)' };
+  const onDark = { style: 'solid', width: '2px', color: 'rgb(217, 85, 63)' };
+  expect(await ring('nav a.talk')).toEqual(onLight);
   await page.locator('#contacto').scrollIntoViewIfNeeded();
-  expect(await ring('.c3 .big')).toEqual(seal);
-  expect(await ring('.c3 .row')).toEqual(seal);
-  expect(await ring('.c3 a[href="mailto:info@koisoftware.com"]')).toEqual(seal);
-  expect(await ring('.c3 a[href="https://instagram.com/carloshugoeg"]')).toEqual(seal);
+  expect(await ring('.c3 .big')).toEqual(onDark);
+  expect(await ring('.c3 .row')).toEqual(onDark);
+  expect(await ring('.c3 a[href="mailto:info@koisoftware.com"]')).toEqual(onDark);
+  expect(await ring('.c3 a[href="https://instagram.com/carloshugoeg"]')).toEqual(onDark);
 
   const colorOf = (selector: string) =>
     page.locator(selector).first().evaluate((node) => getComputedStyle(node).color);

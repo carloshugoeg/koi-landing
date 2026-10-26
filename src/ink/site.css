@@ -56,6 +56,7 @@ footer{padding:44px 72px;border-top:1px solid #c9c1b1;display:flex;justify-conte
 .pm .x:focus-visible{outline:1px solid #B8321E}
 .pm .ph{padding:24px;text-align:center;color:#5E5A53;font-size:13px;line-height:1.6;border:1px dashed #c9c1b1;margin:18px}
 .pm .grab{display:none}
+@media(min-width:601px) and (max-width:900px){.pj2 .lab2{margin-left:40px}.pjx{padding-left:40px;padding-right:40px}.pjx .tx{width:auto;max-width:100%}}
 @media(max-width:600px){.pj2{padding:40px 0 56px}.pj2 .lab2{margin-left:24px}.pjx{padding:52px 24px 44px}.pjx .tx{width:auto}.pjx h3{font-size:32px}.pjx p{font-size:15px}
 .pm .card{left:0;right:0;top:auto;bottom:0;width:auto;max-height:90vh;transform:translateY(100%);grid-template-columns:1fr;border-radius:14px 14px 0 0;opacity:1}
 .pm.vis .card{transform:translateY(0)}.pm .gal{border-right:0;border-bottom:1px solid #c9c1b1;padding:34px 18px 16px;order:1}.pm .inf{padding:24px 22px 10px;order:2}.pm .inf h2{font-size:32px}

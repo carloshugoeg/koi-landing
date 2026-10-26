@@ -10,7 +10,8 @@ export function attachProjects(host: HTMLElement): () => void {
 
   const layout = () => {
     const width = window.innerWidth;
-    const narrow = width < 600;
+    /* 601–900 cannot hold two 440px columns. Stack them; 375 and 1440 stay put. */
+    const narrow = width <= 900;
     items.forEach((item, index) => {
       const right = index % 2 === 1;
       const text = item.querySelector<HTMLElement>('.tx');
