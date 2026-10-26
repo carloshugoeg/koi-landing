@@ -116,6 +116,111 @@ test('whatsapp anchors keep the ink colors', async ({ page }) => {
   await expect.poll(() => ink('.c3 .row')).toEqual({ color: 'rgb(184, 50, 30)', decoration: 'none' });
 });
 
+test('project titles load Shippori Mincho 400 and the arrow is U+2192', async ({ page }) => {
+  for (const [width, size] of [
+    [1440, '42px'],
+    [375, '32px'],
+  ] as const) {
+    await page.setViewportSize({ width, height: 900 });
+    await ready(page);
+    const titles = await page.locator('.pjx h3').evaluateAll((nodes) =>
+      nodes.map((node) => {
+        const style = getComputedStyle(node);
+        const sample = 'KoiPOS';
+        const canvas = document.createElement('canvas').getContext('2d');
+        if (!canvas) return null;
+        canvas.font = `400 42px "Shippori Mincho"`;
+        const shippori = canvas.measureText(sample).width;
+        canvas.font = `400 42px "Times New Roman"`;
+        const times = canvas.measureText(sample).width;
+        return {
+          text: node.textContent,
+          family: style.fontFamily,
+          weight: style.fontWeight,
+          size: style.fontSize,
+          loaded: document.fonts.check('400 42px "Shippori Mincho"'),
+          shippori,
+          times,
+        };
+      }),
+    );
+    expect(titles.map((title) => title?.text)).toEqual(['KoiPOS', 'KoiCRM', 'Koins', 'Nutrea']);
+    for (const title of titles) {
+      expect(title?.family).toContain('Shippori Mincho');
+      expect(title?.weight).toBe('400');
+      expect(title?.size).toBe(size);
+      expect(title?.loaded).toBe(true);
+      expect(Math.abs((title?.shippori ?? 0) - (title?.times ?? 0))).toBeGreaterThan(4);
+    }
+    const marks = await page.locator('.pjx .go b').evaluateAll((nodes) =>
+      nodes.map((node) => {
+        const style = getComputedStyle(node);
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        const box = range.getBoundingClientRect();
+        const arrowFace = [...document.fonts].some(
+          (face) =>
+            face.status === 'loaded' &&
+            face.family.replaceAll('"', '') === 'Zen Kaku Gothic New' &&
+            face.weight === '400' &&
+            face.unicodeRange.replaceAll(' ', '') === 'U+2192',
+        );
+        return {
+          text: node.textContent,
+          code: node.textContent?.codePointAt(0),
+          weight: style.fontWeight,
+          color: style.color,
+          width: box.width,
+          arrowFace,
+        };
+      }),
+    );
+    expect(marks).toHaveLength(4);
+    for (const mark of marks) {
+      expect(mark.text).toBe('\u2192');
+      expect(mark.code).toBe(0x2192);
+      expect(mark.weight).toBe('400');
+      expect(mark.color).toBe('rgb(184, 50, 30)');
+      expect(mark.arrowFace).toBe(true);
+      expect(mark.width).toBeGreaterThan(8);
+    }
+  }
+});
+
+test('contacto focus rings match the nav and header links warm on hover', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await ready(page);
+
+  const ring = async (selector: string) => {
+    const locator = page.locator(selector).first();
+    await locator.evaluate((node) => (node as HTMLElement).focus({ focusVisible: true }));
+    return locator.evaluate((node) => {
+      const style = getComputedStyle(node);
+      return { style: style.outlineStyle, width: style.outlineWidth, color: style.outlineColor };
+    });
+  };
+  const seal = { style: 'solid', width: '2px', color: 'rgb(184, 50, 30)' };
+  expect(await ring('nav a.talk')).toEqual(seal);
+  await page.locator('#contacto').scrollIntoViewIfNeeded();
+  expect(await ring('.c3 .big')).toEqual(seal);
+  expect(await ring('.c3 .row')).toEqual(seal);
+  expect(await ring('.c3 a[href="mailto:info@koisoftware.com"]')).toEqual(seal);
+  expect(await ring('.c3 a[href="https://instagram.com/carloshugoeg"]')).toEqual(seal);
+
+  const colorOf = (selector: string) =>
+    page.locator(selector).first().evaluate((node) => getComputedStyle(node).color);
+  await page.locator('nav a.talk').hover();
+  await expect.poll(() => colorOf('nav a.talk')).toBe('rgb(184, 50, 30)');
+  await page.locator('nav a[href="#servicios"]').hover();
+  await expect.poll(() => colorOf('nav a[href="#servicios"]')).toBe('rgb(184, 50, 30)');
+  await page.locator('nav a[href="#proyectos"]').hover();
+  await expect.poll(() => colorOf('nav a[href="#proyectos"]')).toBe('rgb(184, 50, 30)');
+  await page.locator('nav a[href="#nosotros"]').hover();
+  await expect.poll(() => colorOf('nav a[href="#nosotros"]')).toBe('rgb(184, 50, 30)');
+  await page.locator('.hero .cta').hover();
+  await expect.poll(() => colorOf('.hero .cta')).toBe('rgb(184, 50, 30)');
+});
+
 test('axe is clean on the page and inside a project dialog', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await ready(page);

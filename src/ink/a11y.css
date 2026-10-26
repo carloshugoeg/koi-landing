@@ -33,7 +33,6 @@ body {
 nav a,
 nav a:link,
 nav a:visited,
-nav a:hover,
 nav a:active,
 nav a:focus {
   color: #121212;
@@ -46,7 +45,6 @@ nav a:focus {
 /* Anchors with href pick up the browser's blue underline. These replaced inert labels. */
 a.cta:link,
 a.cta:visited,
-a.cta:hover,
 a.cta:active,
 a.cta:focus,
 .ns2 a.cta2:link,
@@ -55,6 +53,18 @@ a.cta:focus,
 .ns2 a.cta2:active,
 .ns2 a.cta2:focus {
   color: #121212;
+  text-decoration: none;
+}
+
+/* :link still matches while the pointer is over the control, and it ties :hover.
+   The seal-red state has to win that tie for the header and the nav. */
+nav a:hover,
+nav a:link:hover,
+nav a:visited:hover,
+a.cta:hover,
+a.cta:link:hover,
+a.cta:visited:hover {
+  color: #b8321e;
   text-decoration: none;
 }
 
@@ -74,6 +84,12 @@ a.cta:focus,
 .c3 a.big:focus-visible {
   color: #ede7da;
   text-decoration: none;
+}
+
+.c3 a.big:focus-visible,
+.ct a.row:focus-visible {
+  outline: 2px solid #b8321e;
+  outline-offset: 4px;
 }
 
 .ct a.row:hover,
