@@ -1,0 +1,103 @@
+html {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-synthesis: none;
+}
+
+#root {
+  min-height: 100%;
+}
+
+.skip {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 80;
+  transform: translateY(-160%);
+  background: #121212;
+  color: #ede7da;
+  padding: 10px 14px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.skip:focus {
+  transform: none;
+}
+
+nav a {
+  color: inherit;
+  text-decoration: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+nav a.brand {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0;
+  display: flex;
+  gap: 12px;
+}
+
+nav a:focus-visible,
+.cta:focus-visible,
+.cta2:focus-visible {
+  outline: 2px solid #b8321e;
+  outline-offset: 4px;
+}
+
+.cta,
+.cta2,
+.c3 .big,
+.ct .row {
+  min-height: 44px;
+}
+
+.ola .svc h2 {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 500;
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.pm .inf h3 {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 11.5px;
+  letter-spacing: 0.28em;
+  color: #5e5a53;
+  font-weight: 500;
+  margin: 22px 0 10px;
+  text-transform: uppercase;
+}
+
+footer.f2 {
+  background: #121212;
+  color: #9c968b;
+  border-color: #3a3833;
+}
+
+@media (max-width: 600px) {
+  .ola .svc h2 {
+    font-size: 25px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ola .svc {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .b1 .hanko {
+    opacity: 1;
+    transform: rotate(-5deg);
+  }
+}

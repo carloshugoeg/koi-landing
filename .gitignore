@@ -26,3 +26,8 @@ dist-ssr
 # Python
 .venv/
 __pycache__/
+
+# Tests and local visual diffs
+test-results/
+playwright-report/
+proof/
