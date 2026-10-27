@@ -1,6 +1,6 @@
 (()=>{const v=(new URLSearchParams(location.search).get('c')||'c3').toLowerCase();if(!/^c[123]$/.test(v))return;
 const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const s=document.createElement('section');s.className='ct '+v;s.id='ct';s.setAttribute('aria-labelledby','cth');
+const s=document.createElement('section');s.className='ct '+v;s.id='contacto';s.setAttribute('aria-labelledby','cth');
 const lab='<div class="lab2 rv"><span class=seal>四</span>CONTACTO</div>';
 const ph=t=>`<i class=ph title="Placeholder: dato real">${t}</i>`;
 const rows=`<a class="row rv" href="https://wa.me/50258713903" target=_blank rel=noopener><span>WHATSAPP</span><b>+502 5871 3903</b></a><a class="row rv" href="mailto:info@koisoftware.com"><span>CORREO</span><b>info@koisoftware.com</b></a><a class="row rv" href="https://instagram.com/carloshugoeg" target=_blank rel=noopener><span>INSTAGRAM</span><b>@carloshugoeg</b></a>`;
