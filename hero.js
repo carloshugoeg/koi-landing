@@ -1,6 +1,12 @@
 (()=>{const im=document.getElementById('hk'),box=document.getElementById('hkf'),hero=document.querySelector('.hero'),nav=document.querySelector('.hero nav'),L='koi-lib/';
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,f=(s,i)=>L+s+'/'+String(i).padStart(2,'0')+'.png';
-['swim','turn-left','turn-right'].forEach(s=>{for(let i=0;i<(s=='swim'?16:12);i++)new Image().src=f(s,i)});
+const pix=new Map();
+function bake(src,img){if(pix.has(src)||!img.naturalWidth)return;const c=document.createElement('canvas');c.width=c.height=700;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(img,0,0,700,700);const d=g.getImageData(0,0,700,700).data,o=[];
+ for(let p=0,i=0;p<490000;p+=2,i+=8){const a=d[i+3]/255;if(a<.02)continue;const r=d[i]*a+237*(1-a),gc=d[i+1]*a+231*(1-a),b=d[i+2]*a+218*(1-a);if(Math.abs(r*237/255-237)+Math.abs(gc*231/255-231)+Math.abs(b*218/255-218)>80)o.push(p%700,(p/700)|0)}
+ pix.set(src,Int16Array.from(o))}
+function vis(pts,tx,ty,deg,nb){const th=deg*Math.PI/180,co=Math.cos(th),si=Math.sin(th),ox=S*.54,oy=S*.24,W=innerWidth,H=innerHeight;let sx=0,sy=0,n=0;
+ for(let i=0;i<pts.length;i+=2){const dx=pts[i]-ox,dy=pts[i+1]-oy,x=tx+ox+dx*co-dy*si,y=ty+oy+dx*si+dy*co;if(x<0||y<0||x>=W||y>=H||(nb>0&&y<nb))continue;sx+=x;sy+=y;n++}
+ return n>80?[sx/n,sy/n]:null}
 let mob,S,path;
 function cr(pts,t){const n=pts.length-1,x=Math.min(.9999,Math.max(0,t))*n,i=x|0,u=x-i,p=k=>pts[Math.max(0,Math.min(n,k))],a=p(i-1),b=p(i),c=p(i+1),d=p(i+2);
  return[0,1].map(k=>.5*((2*b[k])+(-a[k]+c[k])*u+(2*a[k]-5*b[k]+4*c[k]-d[k])*u*u+(-a[k]+3*b[k]-3*c[k]+d[k])*u*u*u))}
@@ -16,21 +22,29 @@ function renderM(ts){const t=RM?0:Math.max(0,Math.min(1,scrollY/(hero.offsetHeig
  hm.style.width=hm.style.height=IMG*K+'px';hm.style.transform=`translate(${PCX-CX*K}px,${PCY-CY*K}px) rotate(${-t*360}deg)`}
 function loopM(ts){if(mob){renderM(ts)}if(!RM)requestAnimationFrame(loopM)}requestAnimationFrame(loopM);
 for(let i=0;i<12;i++)new Image().src='circ/'+String(i).padStart(2,'0')+'.png';
-// Each step cancels a measured rightward jump of the visible centre. The value only grows.
-function lead(s){let n=0;if(s>=265)n=1;if(s>=269)n=77;if(s>=334)n=82;if(s>=336)n=83;if(s>=344)n=92;if(s>=354)n=104;if(s>=355)n=118;if(s>=356)n=127;if(s>=364)n=139;if(s>=374)n=151;if(s>=376)n=157;if(s>=632)n=167;if(s>=636)n=179;return n}
-function fade(s){if(s<=1040)return 1;if(s>=1100)return 0;const u=(s-1040)/60,sm=u*u*(3-2*u);return .8*(1-sm)}
-function render(){if(mob){im.style.position='';box.style.position='absolute';box.style.opacity=1;renderM(performance.now());return}const fixed=!RM;im.style.position=fixed?'fixed':'';box.style.position=fixed?'fixed':'absolute';const H=hero.offsetHeight,pose=RM?0:Math.min(scrollY,804),t=RM?0:Math.max(0,Math.min(1,pose/H));
+// Ink centre of each frame in the 700px box. A swap used to slide the body because this point is not the transform origin.
+const INK={swim:[[370,340],[368,340],[364,340],[359,342],[352,343],[346,344],[329,343],[326,341],[325,340],[327,339],[331,340],[336,341],[343,342],[349,342],[366,341],[369,340]],tl:[[365,341],[378,335],[387,329],[393,325],[396,324],[398,325],[398,327],[396,330],[392,333],[385,336],[376,339],[364,342]],tr:[[365,341],[346,343],[315,340],[298,330],[287,320],[283,312],[283,310],[288,314],[297,323],[312,334],[332,342],[364,342]]};
+function arm(src,th){const p=src.split('/'),k=p[1]=='turn-left'?'tl':p[1]=='turn-right'?'tr':'swim',c=INK[k][parseInt(p[2],10)],lx=c[0]-S*.54,ly=c[1]-S*.24,co=Math.cos(th),si=Math.sin(th);return[lx*co-ly*si,lx*si+ly*co]}
+// The integral ends above and right of the accepted centre. Ease onto it after the headline, with the derivative zero at both ends.
+function drift(s){if(s<=320)return[0,0];const u=Math.min(1,(s-320)/580),m=u*u*(3-2*u);const tail=s<=900?0:Math.min(16,(s-900)*.12);return[-84*m-tail,66*m]}
+function place(src,deg,nb,x,y,df){const th=deg*Math.PI/180,b=arm(src,th),r=arm(f('swim',0),th),oy=.24;let tx=x-S*.54-(b[0]-r[0])+df[0],ty=y-S*oy-(b[1]-r[1])+df[1];
+ const cur=pix.get(src),ref=pix.get(f('swim',0));if(cur&&ref){const tgt=vis(ref,x-S*.54+df[0],y-S*oy+df[1],deg,nb);if(tgt)for(let i=0;i<3;i++){const c=vis(cur,tx,ty,deg,nb);if(!c)break;tx+=tgt[0]-c[0];ty+=tgt[1]-c[1]}}
+ return[tx,ty]}
+function fade(s){if(s<=1040)return 1;if(s>=1160)return 0;const u=(s-1040)/120,m=u*u*(3-2*u);return 1-m}
+function render(){if(mob){im.style.position='';box.style.position='absolute';box.style.opacity=1;renderM(performance.now());return}const fixed=!RM;im.style.position=fixed?'fixed':'';box.style.position=fixed?'fixed':'absolute';const H=hero.offsetHeight,travel=RM?0:scrollY/H,t=Math.max(0,Math.min(1,travel));
  const [x,y]=path(t),a=ang(t);let k=ang(Math.min(1,t+.02))-ang(Math.max(0,t-.02));k=Math.atan2(Math.sin(k),Math.cos(k));
- const d=t*(mob?660:1100);let src;
+ const d=Math.min(travel,1)*(mob?660:1100);let src;
  if(mob){const ph=Math.floor(d/14)%8,i=ph<4?3+ph:10-ph;src=(Math.floor(d/120)%3==2)?f('swim',Math.floor(d/10)%16):f('turn-right',i)}
  else if(Math.abs(k)>.06){src=f(k>0?'turn-right':'turn-left',Math.min(6,Math.round(Math.abs(k)/.25*6)))}else src=f('swim',Math.floor(d/12)%16);
- if(RM)src=f('swim',0);if(im.dataset.s!==src){im.src=src;im.dataset.s=src}
+ if(RM)src=f('swim',0);else if(travel>=1)src=f('turn-right',3);
+ if(im.dataset.s!==src){im.src=src;im.dataset.s=src}
  const oy=.24,nb=nav.getBoundingClientRect().bottom;
  if(nb<=0)box.style.maskImage=box.style.webkitMaskImage='none';
  else{const g=`linear-gradient(to bottom,transparent ${nb}px,#000 ${nb+40}px)`;box.style.maskImage=box.style.webkitMaskImage=g}
  box.style.opacity=RM?1:fade(scrollY);
  im.style.transformOrigin=`54% ${oy*100}%`;
- const slip=RM||scrollY<=874?0:Math.min(90,scrollY-874);
- im.style.transform=`translate(${x-S*.54-lead(pose)-slip}px,${y-S*oy}px) rotate(${a*180/Math.PI+90}deg)`}
+ const deg=a*180/Math.PI+90,df=RM?[0,0]:drift(scrollY),p=place(src,deg,nb,x,y,df);
+ im.style.transform=`translate(${p[0]}px,${p[1]}px) rotate(${deg}deg)`}
 let raf=0;addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;render()})},{passive:true});
+['swim','turn-left','turn-right'].forEach(s=>{for(let i=0;i<(s=='swim'?16:12);i++){const im2=new Image();const src=f(s,i);im2.onload=()=>{bake(src,im2);render()};im2.src=src}});
 addEventListener('resize',()=>{layout();render()});layout();render();addEventListener('load',render)})();
