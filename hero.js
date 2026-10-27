@@ -26,17 +26,17 @@ for(let i=0;i<12;i++)new Image().src='circ/'+String(i).padStart(2,'0')+'.png';
 const INK={swim:[[370,340],[368,340],[364,340],[359,342],[352,343],[346,344],[329,343],[326,341],[325,340],[327,339],[331,340],[336,341],[343,342],[349,342],[366,341],[369,340]],tl:[[365,341],[378,335],[387,329],[393,325],[396,324],[398,325],[398,327],[396,330],[392,333],[385,336],[376,339],[364,342]],tr:[[365,341],[346,343],[315,340],[298,330],[287,320],[283,312],[283,310],[288,314],[297,323],[312,334],[332,342],[364,342]]};
 function arm(src,th){const p=src.split('/'),k=p[1]=='turn-left'?'tl':p[1]=='turn-right'?'tr':'swim',c=INK[k][parseInt(p[2],10)],lx=c[0]-S*.54,ly=c[1]-S*.24,co=Math.cos(th),si=Math.sin(th);return[lx*co-ly*si,lx*si+ly*co]}
 // The integral ends above and right of the accepted centre. Ease onto it after the headline, with the derivative zero at both ends.
-function drift(s){if(s<=320)return[0,0];const u=Math.min(1,(s-320)/580),m=u*u*(3-2*u);const tail=s<=900?0:Math.min(16,(s-900)*.12);return[-84*m-tail,66*m]}
+function drift(s){if(s<=320)return[0,0];const u=Math.min(1,(s-320)/580),m=u*u*(3-2*u);return[-84*m,66*m]}
 function place(src,deg,nb,x,y,df){const th=deg*Math.PI/180,b=arm(src,th),r=arm(f('swim',0),th),oy=.24;let tx=x-S*.54-(b[0]-r[0])+df[0],ty=y-S*oy-(b[1]-r[1])+df[1];
  const cur=pix.get(src),ref=pix.get(f('swim',0));if(cur&&ref){const tgt=vis(ref,x-S*.54+df[0],y-S*oy+df[1],deg,nb);if(tgt)for(let i=0;i<3;i++){const c=vis(cur,tx,ty,deg,nb);if(!c)break;tx+=tgt[0]-c[0];ty+=tgt[1]-c[1]}}
  return[tx,ty]}
 function fade(s){if(s<=1040)return 1;if(s>=1160)return 0;const u=(s-1040)/120,m=u*u*(3-2*u);return 1-m}
-function render(){if(mob){im.style.position='';box.style.position='absolute';box.style.opacity=1;renderM(performance.now());return}const fixed=!RM;im.style.position=fixed?'fixed':'';box.style.position=fixed?'fixed':'absolute';const H=hero.offsetHeight,travel=RM?0:scrollY/H,t=Math.max(0,Math.min(1,travel));
+function render(){if(mob){im.style.position='';box.style.position='absolute';box.style.opacity=1;renderM(performance.now());if(window.__koiRepaint)window.__koiRepaint();return}const fixed=!RM;im.style.position=fixed?'fixed':'';box.style.position=fixed?'fixed':'absolute';const H=hero.offsetHeight,travel=RM?0:scrollY/H,t=Math.max(0,Math.min(1,travel));
  const [x,y]=path(t),a=ang(t);let k=ang(Math.min(1,t+.02))-ang(Math.max(0,t-.02));k=Math.atan2(Math.sin(k),Math.cos(k));
- const d=Math.min(travel,1)*(mob?660:1100);let src;
+ const d=travel*(mob?660:1100);let src;
  if(mob){const ph=Math.floor(d/14)%8,i=ph<4?3+ph:10-ph;src=(Math.floor(d/120)%3==2)?f('swim',Math.floor(d/10)%16):f('turn-right',i)}
- else if(Math.abs(k)>.06){src=f(k>0?'turn-right':'turn-left',Math.min(6,Math.round(Math.abs(k)/.25*6)))}else src=f('swim',Math.floor(d/12)%16);
- if(RM)src=f('swim',0);else if(travel>=1)src=f('turn-right',3);
+ else if(travel<1&&Math.abs(k)>.06){src=f(k>0?'turn-right':'turn-left',Math.min(6,Math.round(Math.abs(k)/.25*6)))}else src=f('swim',Math.floor(d/12)%16);
+ if(RM)src=f('swim',0);
  if(im.dataset.s!==src){im.src=src;im.dataset.s=src}
  const oy=.24,nb=nav.getBoundingClientRect().bottom;
  if(nb<=0)box.style.maskImage=box.style.webkitMaskImage='none';
@@ -44,7 +44,15 @@ function render(){if(mob){im.style.position='';box.style.position='absolute';box
  box.style.opacity=RM?1:fade(scrollY);
  im.style.transformOrigin=`54% ${oy*100}%`;
  const deg=a*180/Math.PI+90,df=RM?[0,0]:drift(scrollY),p=place(src,deg,nb,x,y,df);
- im.style.transform=`translate(${p[0]}px,${p[1]}px) rotate(${deg}deg)`}
+ // The ink model still misses the screenshot. Past the path, cancel that miss so the cycle stays on one point.
+ let px=p[0],py=p[1];if(travel>=1){const c=FIX[+src.slice(-6,-4)];px+=c[0];py+=c[1]}
+ im.style.transform=`translate(${px}px,${py}px) rotate(${deg}deg)`;if(window.__koiRepaint)window.__koiRepaint()}
+const FIX=[[-6.01,-7.54],[-6.03,-7.2],[-4.58,-6.95],[-3.85,-6.61],[-4.54,-5.93],[-7.27,-5.44],[-6.01,-1.95],[-7.72,-1.98],[-7.29,-1.95],[-6.72,-2.02],[-8.23,-2.4],[-4.85,-2.71],[-7.21,-2.99],[-9.09,-3.58],[-3.47,-7.36],[-5.63,-7.4]];
+// Multiply shows the ola stroke through the body. Punch the body out of that canvas so the ink stays a layer above it.
+const eraser=new Map();
+function makeEraser(img){const c=document.createElement('canvas');c.width=c.height=700;const g=c.getContext('2d');g.drawImage(img,0,0,700,700);const imd=g.getImageData(0,0,700,700),p=imd.data;for(let i=0;i<p.length;i+=4){const a=p[i+3]/255,ink=a<.02?0:Math.abs(p[i]*a+237*(1-a)-237)+Math.abs(p[i+1]*a+231*(1-a)-231)+Math.abs(p[i+2]*a+218*(1-a)-218);p[i]=p[i+1]=p[i+2]=0;p[i+3]=ink>12?255:0}g.putImageData(imd,0,0);return c}
+function eraseFish(){const cv=document.getElementById('wave'),er=eraser.get(im.dataset.s);if(!cv||!er||mob||RM)return;const st=cv.parentElement.getBoundingClientRect(),m=/translate\(([-\d.]+)px,\s*([-\d.]+)px\)\s*rotate\(([-\d.]+)deg\)/.exec(im.style.transform);if(!m)return;const g=cv.getContext('2d'),dpr=devicePixelRatio||1,tx=+m[1],ty=+m[2],deg=+m[3],ox=S*.54,oy=S*.24;g.setTransform(dpr,0,0,dpr,0,0);g.globalCompositeOperation='destination-out';g.globalAlpha=box.style.opacity===''?1:+box.style.opacity;g.save();g.translate(tx-st.left+ox,ty-st.top+oy);g.rotate(deg*Math.PI/180);g.drawImage(er,-ox,-oy,S,S);g.restore();g.globalAlpha=1;g.globalCompositeOperation='source-over'}
+window.__koiErase=eraseFish;
 let raf=0;addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;render()})},{passive:true});
-['swim','turn-left','turn-right'].forEach(s=>{for(let i=0;i<(s=='swim'?16:12);i++){const im2=new Image();const src=f(s,i);im2.onload=()=>{bake(src,im2);render()};im2.src=src}});
+['swim','turn-left','turn-right'].forEach(s=>{for(let i=0;i<(s=='swim'?16:12);i++){const im2=new Image();const src=f(s,i);im2.onload=()=>{bake(src,im2);if(s=='swim')eraser.set(src,makeEraser(im2));render()};im2.src=src}});
 addEventListener('resize',()=>{layout();render()});layout();render();addEventListener('load',render)})();

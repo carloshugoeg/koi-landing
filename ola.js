@@ -28,7 +28,7 @@ function brush(upto){cx.clearRect(0,0,W,H);
 }
 const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)),ss=t=>t*t*(3-2*t);
 function render(p){
- const reveal=RM?W+20:-10+(W+30)*ss(cl(p/.16));brush(reveal);
+ const reveal=RM?W+20:-10+(W+30)*ss(cl(p/.16));brush(reveal);if(window.__koiErase)window.__koiErase();
  svs.forEach((s,i)=>{const t=RM?1:ss(cl((p-(.17+i*.27))/.11));s.style.opacity=t;s.style.transform=`translateY(${(1-t)*18}px)`});
  LEAPS.forEach((L,i)=>{const im=kois[i],u=(p-.12-L.p0*1.4)/(L.dp*1.2),a=spl[i*2],b=spl[i*2+1];
   if(RM||u<=0||u>=1){im.style.opacity=0}else{
@@ -43,7 +43,7 @@ function render(p){
 }
 // r7 pinned progress: 0 when section top hits viewport top, 1 when the sticky stage releases
 function prog(){const r=sec.getBoundingClientRect(),cs=getComputedStyle(sec),pt=parseFloat(cs.paddingTop),pb=parseFloat(cs.paddingBottom),d=sec.offsetHeight-pt-pb-stage.offsetHeight;return d>0?cl((pt-r.top)/d):1}
-let raf=0;const tick=()=>{raf=0;render(prog())};
+let raf=0;const tick=()=>{raf=0;render(prog())};window.__koiRepaint=tick;
 addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(tick)},{passive:true});
 addEventListener('resize',()=>{layout();tick()});
 layout();const m=location.hash.match(/y=(\d+)/);if(m)scrollTo(0,+m[1]);tick();
