@@ -7,7 +7,7 @@ function cr(pts,t){const n=pts.length-1,x=Math.min(.9999,Math.max(0,t))*n,i=x|0,
 function layout(){mob=innerWidth<600;S=mob?330:700;im.style.width=im.style.height=S+'px';
  if(mob){const cx=200,cy=640,r=100;path=t=>{const a=-Math.PI/2+t*2*Math.PI;return[cx+r*Math.cos(a),cy+r*Math.sin(a)]}}
  else{const W=innerWidth,sx=x=>x*W/1440;
-  const pts=[[1160,320],[1048,328],[935,372],[823,458],[710,570],[598,682],[485,768],[373,812],[260,820]].map(([x,y])=>[sx(x),y]);
+  const pts=[[1160,440],[380,510],[1200,640],[660,850],[540,870],[480,885],[440,895],[420,902],[405,908],[395,912]].map(([x,y])=>[sx(x),y]);
   path=t=>cr(pts,t)}}
 const ang=t=>{const a=path(Math.max(0,t-.003)),b=path(Math.min(1,t+.003));return Math.atan2(b[1]-a[1],b[0]-a[0])};
 const hm=document.getElementById('hm'),K=.56,IMG=900,CX=500,CY=450,PCX=212,PCY=630;let dist=0,lastY=scrollY;
