@@ -1,27 +1,29 @@
-(()=>{const im=document.getElementById('hk'),hero=document.querySelector('.hero'),L='koi-lib/';
-const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,f=(s,i)=>L+s+'/'+String(i).padStart(2,'0')+'.png';
-['swim','turn-left','turn-right'].forEach(s=>{for(let i=0;i<(s=='swim'?16:12);i++)new Image().src=f(s,i)});
-let mob,S,path;
-function cr(pts,t){const n=pts.length-1,x=Math.min(.9999,Math.max(0,t))*n,i=x|0,u=x-i,p=k=>pts[Math.max(0,Math.min(n,k))],a=p(i-1),b=p(i),c=p(i+1),d=p(i+2);
- return[0,1].map(k=>.5*((2*b[k])+(-a[k]+c[k])*u+(2*a[k]-5*b[k]+4*c[k]-d[k])*u*u+(-a[k]+3*b[k]-3*c[k]+d[k])*u*u*u))}
-function layout(){mob=innerWidth<600;S=mob?330:700;im.style.width=im.style.height=S+'px';
- if(mob){const cx=200,cy=640,r=100;path=t=>{const a=-Math.PI/2+t*2*Math.PI;return[cx+r*Math.cos(a),cy+r*Math.sin(a)]}}
- else{const W=innerWidth,sx=x=>x*W/1440;
-  const pts=[[1160,440],[380,510],[1200,640],[660,850],[540,870],[480,885],[440,895],[420,902],[405,908],[395,912]].map(([x,y])=>[sx(x),y]);
-  path=t=>cr(pts,t)}}
-const ang=t=>{const a=path(Math.max(0,t-.003)),b=path(Math.min(1,t+.003));return Math.atan2(b[1]-a[1],b[0]-a[0])};
-const hm=document.getElementById('hm'),K=.56,IMG=900,CX=500,CY=450,PCX=212,PCY=630;let dist=0,lastY=scrollY;
-function renderM(ts){const t=RM?0:Math.max(0,Math.min(1,scrollY/(hero.offsetHeight*.9)));dist+=Math.abs(scrollY-lastY);lastY=scrollY;
- const i=RM?0:Math.floor(((ts||0)/1000*5+dist/18))%12,src='circ/'+String(i).padStart(2,'0')+'.png';if(hm.dataset.s!==src){hm.src=src;hm.dataset.s=src}
- hm.style.width=hm.style.height=IMG*K+'px';hm.style.transform=`translate(${PCX-CX*K}px,${PCY-CY*K}px) rotate(${-t*360}deg)`}
-function loopM(ts){if(mob){renderM(ts)}if(!RM)requestAnimationFrame(loopM)}requestAnimationFrame(loopM);
-for(let i=0;i<12;i++)new Image().src='circ/'+String(i).padStart(2,'0')+'.png';
-function render(){if(mob){renderM(performance.now());return}const H=hero.offsetHeight,t=RM?0:Math.max(0,Math.min(1,scrollY/H));
- const [x,y]=path(t),a=ang(t);let k=ang(Math.min(1,t+.02))-ang(Math.max(0,t-.02));k=Math.atan2(Math.sin(k),Math.cos(k));
- const d=t*(mob?660:1100);let src;
- if(mob){const ph=Math.floor(d/14)%8,i=ph<4?3+ph:10-ph;src=(Math.floor(d/120)%3==2)?f('swim',Math.floor(d/10)%16):f('turn-right',i)}
- else if(Math.abs(k)>.06){src=f(k>0?'turn-right':'turn-left',Math.min(6,Math.round(Math.abs(k)/.25*6)))}else src=f('swim',Math.floor(d/12)%16);
- if(RM)src=f('swim',0);if(im.dataset.s!==src){im.src=src;im.dataset.s=src}
- im.style.transform=`translate(${x-S*.45}px,${y-S*.40}px) rotate(${a*180/Math.PI+90}deg)`}
-let raf=0;addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;render()})},{passive:true});
-addEventListener('resize',()=>{layout();render()});layout();render();addEventListener('load',render)})();
+(()=>{const im=document.getElementById('hk'),hero=document.querySelector('.hero'),hm=document.getElementById('hm');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,pad=i=>String(i).padStart(2,'0');
+const frame=(s,i)=>'koi-lib/'+s+'/'+pad(i)+'.png';
+const clamp=v=>Math.max(0,Math.min(1,v));
+['swim','turn-left','turn-right'].forEach(s=>{for(let i=0;i<(s=='swim'?16:12);i++)new Image().src=frame(s,i)});
+for(let i=0;i<12;i++)new Image().src='circ/'+pad(i)+'.png';
+const P=[[1000,560],[780,500],[520,640],[260,600]];
+function cubic(t){const u=1-t;return[0,1].map(k=>u*u*u*P[0][k]+3*u*u*t*P[1][k]+3*u*t*t*P[2][k]+t*t*t*P[3][k])}
+let narrow,size,distance=0,lastY=scrollY,frameId=0;
+const pointAt=t=>{if(narrow){const a=-Math.PI/2+t*2*Math.PI;return[200+100*Math.cos(a),640+100*Math.sin(a)]}return cubic(t)};
+const angleAt=t=>{const a=pointAt(Math.max(0,t-.003)),b=pointAt(Math.min(1,t+.003));return Math.atan2(b[1]-a[1],b[0]-a[0])};
+function renderMobile(time){const progress=reduce?0:clamp(scrollY/(hero.offsetHeight*.9));distance+=Math.abs(scrollY-lastY);lastY=scrollY;
+ const index=reduce?0:Math.floor(time/1000*5+distance/18)%12,src='circ/'+pad(index)+'.png';if(hm.dataset.s!==src){hm.src=src;hm.dataset.s=src}
+ const scale=.56,imageSize=900*scale;hm.style.width=hm.style.height=imageSize+'px';
+ hm.style.transform=`translate(${212-500*scale}px,${630-450*scale}px) rotate(${-progress*360}deg)`}
+function renderDesktop(){const progress=reduce?0:clamp(scrollY/(hero.offsetHeight*.8));
+ const [x,y]=pointAt(progress),angle=angleAt(progress);let turn=angleAt(Math.min(1,progress+.02))-angleAt(Math.max(0,progress-.02));turn=Math.atan2(Math.sin(turn),Math.cos(turn));
+ const traveled=progress*1100;let src=frame('swim',Math.floor(traveled/12)%16);
+ if(Math.abs(turn)>.06)src=frame(turn>0?'turn-right':'turn-left',Math.min(6,Math.round(Math.abs(turn)/.25*6)));
+ if(reduce)src=frame('swim',0);if(im.dataset.s!==src){im.src=src;im.dataset.s=src}
+ im.style.width=im.style.height=size+'px';im.style.transform=`translate(${x-size*.45}px,${y-size*.4}px) rotate(${angle*180/Math.PI+90}deg)`}
+function layout(){narrow=innerWidth<600;size=narrow?330:700;im.style.width=im.style.height=size+'px'}
+function paint(time){if(narrow)renderMobile(time);else renderDesktop()}
+function tick(time){frameId=0;const rect=hero.getBoundingClientRect(),visible=rect.bottom>0&&rect.top<innerHeight;
+ if(narrow&&!reduce&&visible){paint(time);frameId=requestAnimationFrame(tick);return}paint(time)}
+function onScroll(){if(!frameId)frameId=requestAnimationFrame(tick)}
+addEventListener('scroll',onScroll,{passive:true});
+addEventListener('resize',()=>{layout();onScroll()});
+layout();frameId=requestAnimationFrame(tick)})();
