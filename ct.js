@@ -10,7 +10,7 @@ if(v==='c1')h=lab+`<h2 id=cth class=rv>¿Qué necesitas <em>resolver</em>?</h2><
 if(v==='c2')h=`<div>${lab}<h2 id=cth class=rv>Escríbenos<br>como le <em>contarías</em><br>a un amigo.</h2><p class="lead rv">Sin formularios largos. Tres datos y te respondemos para agendar la primera llamada.</p><div class=alt>${rows}</div></div>
 <form class="sheet rv" onsubmit="return false"><label for=n>TU NOMBRE</label><input id=n autocomplete=name><label for=b>TU NEGOCIO</label><input id=b autocomplete=organization><label for=q>¿QUÉ NECESITAS RESOLVER?</label><textarea id=q rows=3></textarea><button type=submit><i></i>Enviar</button></form>${koi}`;
 if(v==='c3')h=lab+`<h2 id=cth class=rv>Empecemos por la <em>primera ronda</em>.</h2><p class="lead rv">Una llamada para entender tu operación. Después, un preview funcionando que puedes probar antes de aprobar nada.</p><a class="big rv" href="https://wa.me/50258713903" target=_blank rel=noopener><span class=seal>鯉</span>Agenda una primera llamada</a><div class=rows>${rows}</div>${koi}`;
-s.innerHTML=h;const f=document.querySelector('footer');f.before(s);
+s.innerHTML=h;document.querySelector('main').append(s);
 const rv=[...s.querySelectorAll('.rv,.stamp')],k=s.querySelector('.kw');
 function t(){const H=innerHeight;rv.forEach(e=>{if(rm||e.getBoundingClientRect().top<H*.9)e.classList.add('in')});if(!rm){const r=s.getBoundingClientRect(),q=Math.min(1,Math.max(0,(H-r.top)/(r.height+H)));k.style.transform=`rotate(${-30+q*120}deg)`}}
 addEventListener('scroll',t,{passive:true});t()})();

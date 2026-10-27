@@ -25,7 +25,7 @@ h=lab+`<div class=intro><h2 id=nsh class=rv>Cuatro pliegos.<br>Un sistema comple
 <div class=track><div class=stage><div class=meter aria-hidden=true>${S.map(s=>`<b>${s[1]}</b>`).join('')}</div>
 <div class=desk>${S.map((s,i)=>`<article class="pg p${i} torn"><span class=n>${s[0]}</span><h3>${s[2]}</h3><p>${s[3]}</p><span class=out><small>SALE DE AQUÍ</small>${s[4]}</span><span class=k aria-hidden=true>${s[1]}</span></article>`).join('')}</div></div></div>
 <div class=close><p><b>KoiPOS</b> y <b>Nutrea</b> se armaron con estos cuatro pliegos. ${ph}.</p><a class=cta2 href="#"><i></i>Empieza por el primer pliego</a></div>${koi}`}
-sec.innerHTML=h;document.querySelector('footer').before(sec);
+sec.innerHTML=h;document.querySelector('main').append(sec);
 const g=`url("data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><filter id="f"><feTurbulence type="fractalNoise" baseFrequency=".9 .04" numOctaves="3" seed="3"/><feColorMatrix values="0 0 0 0 .37 0 0 0 0 .35 0 0 0 0 .32 0 0 0 -1.4 .9"/></filter><rect width="100%" height="100%" filter="url(#f)"/></svg>')}")`;
 const fib=`url("data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><filter id="f"><feTurbulence type="turbulence" baseFrequency=".012 .3" numOctaves="2" seed="8"/><feColorMatrix values="0 0 0 0 .55 0 0 0 0 .5 0 0 0 0 .42 0 0 0 -2 1.1"/></filter><rect width="100%" height="100%" filter="url(#f)"/></svg>')}")`;
 sec.style.setProperty('--grain',g);sec.style.setProperty('--fib',fib);
