@@ -32,7 +32,6 @@ sec.style.setProperty('--grain',g);sec.style.setProperty('--fib',fib);
 let seed=7;const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
 sec.querySelectorAll('.torn').forEach(el=>{const p=[],st=26,a=2.6;for(let i=0;i<=st;i++)p.push(`${i/st*100}% ${rnd()*a}%`);for(let i=0;i<=st;i++)p.push(`${100-rnd()*1.4}% ${i/st*100}%`);for(let i=st;i>=0;i--)p.push(`${i/st*100}% ${100-rnd()*a}%`);for(let i=st;i>=0;i--)p.push(`${rnd()*1.4}% ${i/st*100}%`);el.style.clipPath=`polygon(${p.join(',')})`});
 const rvs=[...sec.querySelectorAll('.rv')];const cl=(x)=>Math.min(1,Math.max(0,x));
-// microinteraction: pointer tilt on sheets
 if(!rm&&matchMedia('(hover:hover)').matches)sec.querySelectorAll('.leaf,.note,.pg').forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--tx',((e.clientX-r.left)/r.width-.5)*4+'deg');el.style.setProperty('--ty',((e.clientY-r.top)/r.height-.5)*-4+'deg')});el.addEventListener('pointerleave',()=>{el.style.setProperty('--tx','0deg');el.style.setProperty('--ty','0deg')})});
 function t(){const H=innerHeight,r=sec.getBoundingClientRect();
  rvs.forEach(e=>{if(rm||e.getBoundingClientRect().top<H*.88)e.classList.add('in')});

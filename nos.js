@@ -22,7 +22,6 @@ else{sec.innerHTML=lab+`<h2 id=nsh class=rv>Todo el sistema.<br>Un solo estudio.
 <svg class=drip viewBox="0 0 1200 70" preserveAspectRatio=none aria-hidden=true><path d="M0 8 H1200" stroke=#121212 stroke-width=1.2 fill=none /><path d="M180 8 q2 18 0 30 " stroke=#121212 stroke-width=2 fill=none /><circle cx=180 cy=40 r=3.5 fill=#121212 /><path d="M612 8 q2 30 0 46 " stroke=#B8321E stroke-width=2.4 fill=none /><circle cx=612 cy=57 r=4.5 fill=#B8321E /><path d="M960 8 q1 10 0 16" stroke=#121212 stroke-width=1.6 fill=none /></svg>
 <div class=end><p>Proyectos públicos: <b>KoiPOS</b> y <b>Nutrea</b>.</p><a class=cta2 href="#"><i></i>Empecemos por una llamada</a></div>`}
 document.querySelector('footer').before(sec);
-// torn edges + washi grain
 const g=`url("data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><filter id="f"><feTurbulence type="fractalNoise" baseFrequency=".9 .04" numOctaves="3" seed="3"/><feColorMatrix values="0 0 0 0 .37 0 0 0 0 .35 0 0 0 0 .32 0 0 0 -1.4 .9"/></filter><rect width="100%" height="100%" filter="url(#f)"/></svg>')}")`;
 sec.style.setProperty('--grain',g);
 let seed=3;const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;

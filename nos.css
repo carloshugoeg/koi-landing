@@ -8,7 +8,6 @@
 .ns .cta2 i{width:56px;height:1px;background:#B8321E;transition:width .35s}.ns .cta2:hover i,.ns .cta2:focus-visible i{width:92px}
 .ns .ph{color:#B8321E;font-style:normal;border-bottom:1px dashed #B8321E}
 .rv{opacity:0;transform:translateY(22px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}.in .rv,.rv.in{opacity:1;transform:none}
-/* ---------- A: Columna (hybrid B+C) — hanko stamps + vertical numeral rail */
 .ns.a .gr{display:grid;grid-template-columns:200px minmax(0,640px) 1fr;gap:0 64px}
 .ns.a .rail{position:relative;border-right:1px solid #c9c1b1;min-height:100%}
 .ns.a .rail .ln{position:absolute;right:-1px;top:0;width:1px;background:#B8321E;height:0}
@@ -27,7 +26,6 @@
 .ns.a .big.on .hk{transform:rotate(-6deg);opacity:1}
 .ns.a .big small{display:block;margin-top:18px;font-size:12px;letter-spacing:.25em;color:#5E5A53}
 .ns.a .sigk{position:absolute;right:110px;bottom:40px;width:120px;mix-blend-mode:multiply;transform:rotate(80deg);pointer-events:none}
-/* ---------- B: Pliegos — torn washi layers */
 .ns.b{padding-bottom:140px}
 .ns.b .head{position:relative;z-index:2;max-width:860px}
 .ns.b h2{font-size:84px;line-height:1.02}
@@ -47,7 +45,6 @@
 .ns.b .proof .tag{font-size:11px;letter-spacing:.3em;color:#e2826f;margin-bottom:12px;display:block}
 .ns.b .proof .ph{color:#f0a493;border-color:#f0a493}
 .ns.b .cta2{margin-left:4px}
-/* ---------- C: Pincelada — dry brush + oversized numerals + hairlines */
 .ns.c h2{font-size:clamp(44px,9vw,132px);line-height:.98;max-width:1100px}
 .ns.c .bru{display:block;width:min(820px,80%);height:auto;margin:6px 0 0 -14px;clip-path:inset(0 100% 0 0)}
 .ns.c .intro{display:grid;grid-template-columns:1fr minmax(0,460px);gap:40px;margin-top:40px}
@@ -63,7 +60,6 @@
 .ns.c .drip{display:block;width:100%;height:70px;margin-top:60px}
 .ns.c .drip circle{opacity:var(--dq,0)}.ns.c .drip path{stroke-dasharray:var(--l);stroke-dashoffset:var(--l)}
 .ns.c .end{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-top:10px}
-/* ---------- mobile */
 @media(max-width:700px){.ns{padding:56px 24px 64px}.ns p{font-size:15px}
 .ns.a .gr{grid-template-columns:34px minmax(0,1fr);gap:0 18px}.ns.a .vt{margin-right:8px;font-size:12px;letter-spacing:.35em;top:80px}.ns.a h2{font-size:36px}
 .ns.a li{grid-template-columns:40px 1fr;gap:10px}.ns.a li strong{font-size:20px}

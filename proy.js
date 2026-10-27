@@ -43,7 +43,6 @@ function tick(){const vh=innerHeight;items.forEach(el=>{const r=el.getBoundingCl
  const s=el.querySelector('.stk'),pad=el.querySelector('.pad'),tx=el.querySelector('.tx'),q=ease(cl(p/.75));
  s.style.clipPath=`inset(0 ${100-q*100}% 0 0)`;s.style.opacity=.5;pad.style.opacity=.35*ease(cl((p-.15)/.5));
  const t=ease(cl((p-.25)/.45));tx.style.opacity=t;if(!tx.matches(':hover'))tx.style.translate=`0 ${(1-t)*12}px`});if(!RM)requestAnimationFrame(tick)}
-// modal
 const pm=document.createElement('div');pm.className='pm';pm.innerHTML=`<div class=bk></div><div class=card role=dialog aria-modal=true aria-labelledby=pmh tabindex=-1><span class=grab></span><div class=gal></div><div class=inf></div></div>`;document.body.appendChild(pm);
 const card=pm.querySelector('.card');let last=null;
 function show(d,j){const g=pm.querySelector('.gal');if(!d.g.length){g.innerHTML=`<div class=main><div class=ph>Capturas en preparación.<br></div></div><p class=cap>Imagen de referencia pendiente</p>`;return}
