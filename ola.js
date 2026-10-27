@@ -28,7 +28,7 @@ function brush(upto){cx.clearRect(0,0,W,H);
 }
 const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)),ss=t=>t*t*(3-2*t);
 function render(p){
- const reveal=RM?W+20:-10+(W+30)*ss(cl(p/.16));brush(reveal);if(window.__koiErase)window.__koiErase();
+ const reveal=RM?W+20:-10+(W+30)*ss(cl(p/.16));brush(reveal);
  svs.forEach((s,i)=>{const t=RM?1:ss(cl((p-(.17+i*.27))/.11));s.style.opacity=t;s.style.transform=`translateY(${(1-t)*18}px)`});
  LEAPS.forEach((L,i)=>{const im=kois[i],u=(p-.12-L.p0*1.4)/(L.dp*1.2),a=spl[i*2],b=spl[i*2+1];
   if(RM||u<=0||u>=1){im.style.opacity=0}else{

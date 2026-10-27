@@ -7,14 +7,17 @@ function bake(src,img){if(pix.has(src)||!img.naturalWidth)return;const c=documen
 function vis(pts,tx,ty,deg,nb){const th=deg*Math.PI/180,co=Math.cos(th),si=Math.sin(th),ox=S*.54,oy=S*.24,W=innerWidth,H=innerHeight;let sx=0,sy=0,n=0;
  for(let i=0;i<pts.length;i+=2){const dx=pts[i]-ox,dy=pts[i+1]-oy,x=tx+ox+dx*co-dy*si,y=ty+oy+dx*si+dy*co;if(x<0||y<0||x>=W||y>=H||(nb>0&&y<nb))continue;sx+=x;sy+=y;n++}
  return n>80?[sx/n,sy/n]:null}
-let mob,S,path;
+let mob,S,path,turnAng=()=>0;
 function cr(pts,t){const n=pts.length-1,x=Math.min(.9999,Math.max(0,t))*n,i=x|0,u=x-i,p=k=>pts[Math.max(0,Math.min(n,k))],a=p(i-1),b=p(i),c=p(i+1),d=p(i+2);
  return[0,1].map(k=>.5*((2*b[k])+(-a[k]+c[k])*u+(2*a[k]-5*b[k]+4*c[k]-d[k])*u*u+(-a[k]+3*b[k]-3*c[k]+d[k])*u*u*u))}
 function layout(){mob=innerWidth<900;S=mob?330:700;im.style.width=im.style.height=S+'px';
  if(mob){const cx=200,cy=640,r=100;path=t=>{const a=-Math.PI/2+t*2*Math.PI;return[cx+r*Math.cos(a),cy+r*Math.sin(a)]}}
  else{const W=innerWidth,sx=x=>x*W/1440;
   const pts=[[1320,94],[1165,101],[1010,142],[855,221],[700,326],[545,430],[390,509],[235,550],[80,557]].map(([x,y])=>[sx(x),y]);
-  path=t=>cr(pts,t)}}
+  path=t=>cr(pts,t);
+  const pose=[[1160,320],[1048,328],[935,372],[823,458],[710,570],[598,682],[485,768],[373,812],[260,820]].map(([x,y])=>[sx(x),y]);
+  const pp=t=>cr(pose,t);
+  turnAng=t=>{const a=pp(Math.max(0,t-.003)),b=pp(Math.min(1,t+.003));return Math.atan2(b[1]-a[1],b[0]-a[0])}}}
 const ang=t=>{const a=path(Math.max(0,t-.003)),b=path(Math.min(1,t+.003));return Math.atan2(b[1]-a[1],b[0]-a[0])};
 const hm=document.getElementById('hm'),K=.56,IMG=900,CX=500,CY=450,PCX=212,PCY=630;let dist=0,lastY=scrollY;
 function renderM(ts){const t=RM?0:Math.max(0,Math.min(1,scrollY/(hero.offsetHeight*.9)));dist+=Math.abs(scrollY-lastY);lastY=scrollY;
@@ -32,7 +35,7 @@ function place(src,deg,nb,x,y,df){const th=deg*Math.PI/180,b=arm(src,th),r=arm(f
  return[tx,ty]}
 function fade(s){if(s<=1040)return 1;if(s>=1160)return 0;const u=(s-1040)/120,m=u*u*(3-2*u);return 1-m}
 function render(){if(mob){im.style.position='';box.style.position='absolute';box.style.opacity=1;renderM(performance.now());if(window.__koiRepaint)window.__koiRepaint();return}const fixed=!RM;im.style.position=fixed?'fixed':'';box.style.position=fixed?'fixed':'absolute';const H=hero.offsetHeight,travel=RM?0:scrollY/H,t=Math.max(0,Math.min(1,travel));
- const [x,y]=path(t),a=ang(t);let k=ang(Math.min(1,t+.02))-ang(Math.max(0,t-.02));k=Math.atan2(Math.sin(k),Math.cos(k));
+ const [x,y]=path(t),a=ang(t);let k=turnAng(Math.min(1,t+.02))-turnAng(Math.max(0,t-.02));k=Math.atan2(Math.sin(k),Math.cos(k));
  const d=travel*(mob?660:1100);let src;
  if(mob){const ph=Math.floor(d/14)%8,i=ph<4?3+ph:10-ph;src=(Math.floor(d/120)%3==2)?f('swim',Math.floor(d/10)%16):f('turn-right',i)}
  else if(travel<1&&Math.abs(k)>.06){src=f(k>0?'turn-right':'turn-left',Math.min(6,Math.round(Math.abs(k)/.25*6)))}else src=f('swim',Math.floor(d/12)%16);
@@ -45,14 +48,10 @@ function render(){if(mob){im.style.position='';box.style.position='absolute';box
  im.style.transformOrigin=`54% ${oy*100}%`;
  const deg=a*180/Math.PI+90,df=RM?[0,0]:drift(scrollY),p=place(src,deg,nb,x,y,df);
  // The ink model still misses the screenshot. Past the path, cancel that miss so the cycle stays on one point.
- let px=p[0],py=p[1];if(travel>=1){const c=FIX[+src.slice(-6,-4)];px+=c[0];py+=c[1]}
+ let px=p[0],py=p[1];if(travel>=1){const i=+src.slice(-6,-4),c=FIX[i];px+=c[0];py+=c[1];if(scrollY>1040){const e=FADE[i];px+=e[0];py+=e[1]}}
  im.style.transform=`translate(${px}px,${py}px) rotate(${deg}deg)`;if(window.__koiRepaint)window.__koiRepaint()}
-const FIX=[[-6.01,-7.54],[-6.03,-7.2],[-4.58,-6.95],[-3.85,-6.61],[-4.54,-5.93],[-7.27,-5.44],[-6.01,-1.95],[-7.72,-1.98],[-7.29,-1.95],[-6.72,-2.02],[-8.23,-2.4],[-4.85,-2.71],[-7.21,-2.99],[-9.09,-3.58],[-3.47,-7.36],[-5.63,-7.4]];
-// Multiply shows the ola stroke through the body. Punch the body out of that canvas so the ink stays a layer above it.
-const eraser=new Map();
-function makeEraser(img){const c=document.createElement('canvas');c.width=c.height=700;const g=c.getContext('2d');g.drawImage(img,0,0,700,700);const imd=g.getImageData(0,0,700,700),p=imd.data;for(let i=0;i<p.length;i+=4){const a=p[i+3]/255,ink=a<.02?0:Math.abs(p[i]*a+237*(1-a)-237)+Math.abs(p[i+1]*a+231*(1-a)-231)+Math.abs(p[i+2]*a+218*(1-a)-218);p[i]=p[i+1]=p[i+2]=0;p[i+3]=ink>12?255:0}g.putImageData(imd,0,0);return c}
-function eraseFish(){const cv=document.getElementById('wave'),er=eraser.get(im.dataset.s);if(!cv||!er||mob||RM)return;const st=cv.parentElement.getBoundingClientRect(),m=/translate\(([-\d.]+)px,\s*([-\d.]+)px\)\s*rotate\(([-\d.]+)deg\)/.exec(im.style.transform);if(!m)return;const g=cv.getContext('2d'),dpr=devicePixelRatio||1,tx=+m[1],ty=+m[2],deg=+m[3],ox=S*.54,oy=S*.24;g.setTransform(dpr,0,0,dpr,0,0);g.globalCompositeOperation='destination-out';g.globalAlpha=box.style.opacity===''?1:+box.style.opacity;g.save();g.translate(tx-st.left+ox,ty-st.top+oy);g.rotate(deg*Math.PI/180);g.drawImage(er,-ox,-oy,S,S);g.restore();g.globalAlpha=1;g.globalCompositeOperation='source-over'}
-window.__koiErase=eraseFish;
+const FIX=[[15.62,-12.94],[9.44,-11.3],[4.14,-9.57],[-0.11,-7.79],[-4.92,-6.09],[-7.17,-5.62],[-6.08,-2.12],[-8.2,-2.29],[-7.02,-2.27],[-6.89,-2.33],[-7.95,-2.69],[-0.9,-3.37],[1.02,-4.73],[3.6,-6.43],[9.7,-10.66],[16.43,-12.48]];
+const FADE=[[-10.21,4.25],[-8.04,2.19],[-2.87,0.81],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[-3.7,0.79],[-7.01,2.17],[0,0],[-8.89,2.98],[-14.75,4.67]];
 let raf=0;addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;render()})},{passive:true});
-['swim','turn-left','turn-right'].forEach(s=>{for(let i=0;i<(s=='swim'?16:12);i++){const im2=new Image();const src=f(s,i);im2.onload=()=>{bake(src,im2);if(s=='swim')eraser.set(src,makeEraser(im2));render()};im2.src=src}});
+['swim','turn-left','turn-right'].forEach(s=>{for(let i=0;i<(s=='swim'?16:12);i++){const im2=new Image();const src=f(s,i);im2.onload=()=>{bake(src,im2);render()};im2.src=src}});
 addEventListener('resize',()=>{layout();render()});layout();render();addEventListener('load',render)})();
