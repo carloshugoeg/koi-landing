@@ -1,4 +1,4 @@
-(()=>{const im=document.getElementById('hk'),hero=document.querySelector('.hero'),L='koi-lib/';
+(()=>{const im=document.getElementById('hk'),box=document.getElementById('hkf'),hero=document.querySelector('.hero'),nav=document.querySelector('.hero nav'),L='koi-lib/';
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,f=(s,i)=>L+s+'/'+String(i).padStart(2,'0')+'.png';
 ['swim','turn-left','turn-right'].forEach(s=>{for(let i=0;i<(s=='swim'?16:12);i++)new Image().src=f(s,i)});
 let mob,S,path;
@@ -16,13 +16,17 @@ function renderM(ts){const t=RM?0:Math.max(0,Math.min(1,scrollY/(hero.offsetHeig
  hm.style.width=hm.style.height=IMG*K+'px';hm.style.transform=`translate(${PCX-CX*K}px,${PCY-CY*K}px) rotate(${-t*360}deg)`}
 function loopM(ts){if(mob){renderM(ts)}if(!RM)requestAnimationFrame(loopM)}requestAnimationFrame(loopM);
 for(let i=0;i<12;i++)new Image().src='circ/'+String(i).padStart(2,'0')+'.png';
-function render(){if(mob){im.style.position='';renderM(performance.now());return}im.style.position=RM?'':'fixed';const H=hero.offsetHeight,t=RM?0:Math.max(0,Math.min(1,scrollY/H));
+function dodge(s){const sm=u=>{u=Math.max(0,Math.min(1,u));return u*u*(3-2*u)};
+ if(s<=1000)return 0;if(s<1330)return 240*sm((s-1000)/330);if(s<1460)return 240;if(s<1620)return 240*sm((1620-s)/160);return 0}
+function render(){if(mob){im.style.position='';box.style.position='absolute';renderM(performance.now());return}const fixed=!RM;im.style.position=fixed?'fixed':'';box.style.position=fixed?'fixed':'absolute';const H=hero.offsetHeight,t=RM?0:Math.max(0,Math.min(1,scrollY/H));
  const [x,y]=path(t),a=ang(t);let k=ang(Math.min(1,t+.02))-ang(Math.max(0,t-.02));k=Math.atan2(Math.sin(k),Math.cos(k));
  const d=t*(mob?660:1100);let src;
  if(mob){const ph=Math.floor(d/14)%8,i=ph<4?3+ph:10-ph;src=(Math.floor(d/120)%3==2)?f('swim',Math.floor(d/10)%16):f('turn-right',i)}
  else if(Math.abs(k)>.06){src=f(k>0?'turn-right':'turn-left',Math.min(6,Math.round(Math.abs(k)/.25*6)))}else src=f('swim',Math.floor(d/12)%16);
  if(RM)src=f('swim',0);if(im.dataset.s!==src){im.src=src;im.dataset.s=src}
- const drop=RM?0:Math.max(0,scrollY-H);
- im.style.transform=`translate(${x-S*.54}px,${y-S*.34-drop}px) rotate(${a*180/Math.PI+90}deg)`}
+ const drop=RM?0:Math.max(0,scrollY-H),nb=nav.getBoundingClientRect().bottom;
+ if(nb<=0)box.style.maskImage=box.style.webkitMaskImage='none';
+ else{const g=`linear-gradient(to bottom,transparent ${nb}px,#000 ${nb+40}px)`;box.style.maskImage=box.style.webkitMaskImage=g}
+ im.style.transform=`translate(${x-S*.54+dodge(scrollY)}px,${y-S*.24-drop}px) rotate(${a*180/Math.PI+90}deg)`}
 let raf=0;addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;render()})},{passive:true});
 addEventListener('resize',()=>{layout();render()});layout();render();addEventListener('load',render)})();
