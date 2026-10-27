@@ -74,15 +74,24 @@ const traceAt = process.argv.indexOf('--trace');
 if (traceAt !== -1) await trace(process.argv[traceAt + 1]);
 
 const svg = readFileSync(svgPath);
-const sizes = [16, 32, 180, 192, 512];
+const paper = { r: 237, g: 231, b: 218, alpha: 1 };
+const sizes = [16, 32, 192, 512];
 const pngs = [];
 for (const size of sizes) {
   const buf = await sharp(svg, { density: 512 }).resize(size, size).png().toBuffer();
-  const name = size === 180 ? 'apple-touch-icon.png' : `icon-${size}.png`;
-  writeFileSync(join(dir, name), buf);
+  writeFileSync(join(dir, `icon-${size}.png`), buf);
   pngs.push({ size, buf });
-  console.log(name, buf.length);
+  console.log(`icon-${size}.png`, buf.length);
 }
+const touch = await sharp(svg, { density: 512 })
+  .resize(180, 180)
+  .flatten({ background: paper })
+  .removeAlpha()
+  .png()
+  .toBuffer();
+writeFileSync(join(dir, 'apple-touch-icon.png'), touch);
+pngs.push({ size: 180, buf: touch });
+console.log('apple-touch-icon.png', touch.length);
 const ico = pngIco(pngs.filter((p) => p.size === 16 || p.size === 32));
-writeFileSync(join(dir, 'favicon.ico'), ico);
+writeFileSync(join(root, 'public', 'favicon.ico'), ico);
 console.log('favicon.ico', ico.length);
