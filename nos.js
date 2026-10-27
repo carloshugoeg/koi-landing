@@ -1,4 +1,4 @@
-(()=>{const v=(new URLSearchParams(location.search).get('n')||'a').toLowerCase();if(/^b[123]$/.test(v))return;
+(()=>{const v=(new URLSearchParams(location.search).get('n')||'b1').toLowerCase();if(/^b[123]$/.test(v))return;
 const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const sec=document.createElement('section');sec.className='ns '+v;sec.id='ns';sec.setAttribute('aria-labelledby','nsh');
 const lab='<div class="lab2 rv"><span class=seal>三</span>NOSOTROS</div>';
