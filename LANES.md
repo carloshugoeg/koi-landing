@@ -42,7 +42,7 @@ Regenerate the tracked file list with `git ls-files`.
 | High-risk | `lane:high` | Default | `src/App.tsx` | `src/App.tsx` |
 | High-risk | `lane:high` | Default | `src/main.tsx` | `src/main.tsx` |
 | High-risk | `lane:high` | Default | `src/i18n/config.ts` | `src/i18n/config.ts` |
-| High-risk | `lane:high` | Default | `public/**` | `public/apple-touch-icon.png`, `public/favicon-32.png`, `public/fonts/inter-var.woff2`, `public/fonts/playfair-var-italic.woff2`, `public/fonts/playfair-var.woff2`, `public/koi-mark.svg`, `public/logos/aquaxela.webp`, `public/logos/fotomatiko.webp`, `public/logos/lasfuentes.webp`, `public/logos/tentazioni.webp`, `public/logos/vertice.webp`, `public/logos/zknny.webp`, `public/og.png`, `public/robots.txt`, `public/sitemap.xml` |
+| High-risk | `lane:high` | Default | `public/**` | `public/apple-touch-icon.png`, `public/favicon-32.png`, `public/fonts/inter-var.woff2`, `public/fonts/playfair-var-italic.woff2`, `public/fonts/playfair-var.woff2`, `public/koi-mark.svg`, `public/logos/aquaxela.webp`, `public/logos/fotomatiko.webp`, `public/logos/lasfuentes.webp`, `public/logos/tentazioni.webp`, `public/logos/vertice.webp`, `public/logos/zknny.webp`, `public/og.jpg`, `public/robots.txt`, `public/sitemap.xml` |
 | High-risk | `lane:high` | Default | `tsconfig*.json` | `tsconfig.app.json`, `tsconfig.json`, `tsconfig.node.json` |
 | High-risk | `lane:high` | Default | `*.md` | `CLAUDE.md`, `LANES.md`, `README.md`, `koi_software_context.md` |
 | High-risk | `lane:high` | Default | `.gitignore` | `.gitignore` |
