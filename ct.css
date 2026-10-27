@@ -40,13 +40,13 @@ footer.f2{padding:40px 110px;display:flex;justify-content:space-between;gap:20px
 footer.f2 b{font-family:'Shippori Mincho';font-weight:500;letter-spacing:.04em;color:inherit}
 @media(max-width:900px){.ct{padding:90px 24px}.c1 .g,.c2,.c3 .rows{grid-template-columns:1fr}.c1 .g{gap:30px}.c2 .sheet{padding:44px 24px 32px;transform:none;margin-top:20px}.c1 .kw,.c2 .kw{width:110px;top:60px}footer.f2{padding:30px 24px;flex-direction:column}}
 @media(min-width:768px){
- .c3{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,42%);column-gap:36px;align-items:center}
+ .c3{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(180px,32%);column-gap:72px;align-items:center}
  .c3 .lab2{grid-column:1 / -1}
  .c3 h2{grid-column:1;grid-row:2}
  .c3 .lead{grid-column:1;grid-row:3}
  .c3 .big{grid-column:1;grid-row:4}
  .c3 .rows{grid-column:1 / -1;grid-row:5}
- .c3 .kw{position:relative;grid-column:2;grid-row:2 / 5;justify-self:end;align-self:center;width:min(100%,560px);height:auto;right:auto;bottom:auto;top:auto;z-index:1}
+ .c3 .kw{position:relative;grid-column:2;grid-row:2 / 5;justify-self:end;align-self:center;width:min(100%,440px);height:auto;right:auto;bottom:auto;top:auto;z-index:1}
  .c3 h2,.c3 .lead,.c3 .big{position:relative;z-index:2}
 }
 @media(max-width:767px){
