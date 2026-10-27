@@ -43,7 +43,7 @@ function render(p){
 }
 // r7 pinned progress: 0 when section top hits viewport top, 1 when the sticky stage releases
 function prog(){const r=sec.getBoundingClientRect(),cs=getComputedStyle(sec),pt=parseFloat(cs.paddingTop),pb=parseFloat(cs.paddingBottom),d=sec.offsetHeight-pt-pb-stage.offsetHeight;return d>0?cl((pt-r.top)/d):1}
-let raf=0;const tick=()=>{raf=0;render(prog())};window.__koiRepaint=tick;
+let raf=0;const tick=()=>{raf=0;render(prog())};
 addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(tick)},{passive:true});
 addEventListener('resize',()=>{layout();tick()});
 layout();const m=location.hash.match(/y=(\d+)/);if(m)scrollTo(0,+m[1]);tick();
