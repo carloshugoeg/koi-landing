@@ -50,8 +50,8 @@ function render(){if(mob){im.style.position='';box.style.position='absolute';box
  // The ink model still misses the screenshot. Past the path, cancel that miss so the cycle stays on one point.
  let px=p[0],py=p[1];if(travel>=1){const i=+src.slice(-6,-4),c=FIX[i];px+=c[0];py+=c[1];if(scrollY>1040){const e=FADE[i];px+=e[0];py+=e[1]}}
  im.style.transform=`translate(${px}px,${py}px) rotate(${deg}deg)`;if(window.__koiRepaint)window.__koiRepaint()}
-const FIX=[[15.62,-12.94],[9.44,-11.3],[4.14,-9.57],[-0.11,-7.79],[-4.92,-6.09],[-7.17,-5.62],[-6.08,-2.12],[-8.2,-2.29],[-7.02,-2.27],[-6.89,-2.33],[-7.95,-2.69],[-0.9,-3.37],[1.02,-4.73],[3.6,-6.43],[9.7,-10.66],[16.43,-12.48]];
-const FADE=[[-10.21,4.25],[-8.04,2.19],[-2.87,0.81],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[-3.7,0.79],[-7.01,2.17],[0,0],[-8.89,2.98],[-14.75,4.67]];
+const FIX=[[15.62,-12.94],[9.44,-11.3],[4.14,-9.57],[-0.11,-7.79],[-4.92,-6.09],[-7.17,-5.62],[-6.08,-2.12],[-8.2,-2.29],[-7.02,-2.27],[-6.89,-2.33],[-7.95,-2.69],[-0.9,-3.37],[1.02,-4.73],[3.6,-6.43],[8.57,-9.8],[12.35,-11.88]];
+const FADE=[[-10.21,4.25],[-8.04,2.19],[-2.87,0.81],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[-3.7,0.79],[-7.01,2.17],[-8.44,3.34],[-7.76,2.12],[-10.67,4.07]];
 let raf=0;addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;render()})},{passive:true});
 ['swim','turn-left','turn-right'].forEach(s=>{for(let i=0;i<(s=='swim'?16:12);i++){const im2=new Image();const src=f(s,i);im2.onload=()=>{bake(src,im2);render()};im2.src=src}});
 addEventListener('resize',()=>{layout();render()});layout();render();addEventListener('load',render)})();
