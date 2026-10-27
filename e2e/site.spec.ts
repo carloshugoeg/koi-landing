@@ -254,15 +254,36 @@ test('enso rings stay round from 600 to 900 and match 375 and 1440 outside it', 
       }),
     );
 
+  const lanes = () =>
+    page.locator('.pjx').evaluateAll((nodes) =>
+      nodes.map((node) => {
+        const text = node.querySelector('.tx') as HTMLElement | null;
+        const stroke = node.querySelector('.stk') as HTMLElement | null;
+        if (!text || !stroke) return null;
+        const textRight = text.offsetLeft + text.offsetWidth;
+        const left = Number.parseFloat(stroke.style.left);
+        return {
+          textRight,
+          left,
+          right: left + stroke.offsetWidth,
+          width: stroke.offsetWidth,
+          height: stroke.offsetHeight,
+          fit: getComputedStyle(stroke).objectFit,
+          transform: stroke.style.transform,
+        };
+      }),
+    );
+
   await page.setViewportSize({ width: 768, height: 900 });
   await ready(page);
   for (const width of [600, 768, 900]) {
     await page.setViewportSize({ width, height: 900 });
-    await expect.poll(async () => (await strokes())[0]?.width ?? 0).toBeLessThanOrEqual(width);
-    for (const stroke of await strokes()) {
-      expect(stroke.width).toBe(Math.min(880, width));
+    await expect.poll(async () => (await lanes())[0]?.width ?? 0).toBeGreaterThan(140);
+    for (const stroke of await lanes()) {
+      expect(stroke).not.toBeNull();
+      if (!stroke) continue;
       expect(stroke.height / stroke.width).toBeCloseTo(520 / 900, 2);
-      expect(stroke.left).toBeGreaterThanOrEqual(-1);
+      expect(stroke.left).toBeGreaterThanOrEqual(stroke.textRight - 1);
       expect(stroke.right).toBeLessThanOrEqual(width + 1);
       expect(stroke.fit).toBe('contain');
       expect(stroke.transform.startsWith('rotate(')).toBe(true);
