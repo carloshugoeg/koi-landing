@@ -1,0 +1,13 @@
+{
+  "name": "Koi Software",
+  "short_name": "Koi Software",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#EDE7DA",
+  "theme_color": "#EDE7DA",
+  "icons": [
+    { "src": "favicon/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "favicon/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "favicon/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
