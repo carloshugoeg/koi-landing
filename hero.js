@@ -7,7 +7,7 @@ function cr(pts,t){const n=pts.length-1,x=Math.min(.9999,Math.max(0,t))*n,i=x|0,
 function layout(){mob=innerWidth<900;S=mob?330:700;im.style.width=im.style.height=S+'px';
  if(mob){const cx=200,cy=640,r=100;path=t=>{const a=-Math.PI/2+t*2*Math.PI;return[cx+r*Math.cos(a),cy+r*Math.sin(a)]}}
  else{const W=innerWidth,sx=x=>x*W/1440;
-  const pts=[[1320,110],[1165,117],[1010,158],[855,237],[700,342],[545,446],[390,525],[235,566],[80,573]].map(([x,y])=>[sx(x),y]);
+  const pts=[[1320,94],[1165,101],[1010,142],[855,221],[700,326],[545,430],[390,509],[235,550],[80,557]].map(([x,y])=>[sx(x),y]);
   path=t=>cr(pts,t)}}
 const ang=t=>{const a=path(Math.max(0,t-.003)),b=path(Math.min(1,t+.003));return Math.atan2(b[1]-a[1],b[0]-a[0])};
 const hm=document.getElementById('hm'),K=.56,IMG=900,CX=500,CY=450,PCX=212,PCY=630;let dist=0,lastY=scrollY;
@@ -23,6 +23,6 @@ function render(){if(mob){im.style.position='';renderM(performance.now());return
  else if(Math.abs(k)>.06){src=f(k>0?'turn-right':'turn-left',Math.min(6,Math.round(Math.abs(k)/.25*6)))}else src=f('swim',Math.floor(d/12)%16);
  if(RM)src=f('swim',0);if(im.dataset.s!==src){im.src=src;im.dataset.s=src}
  const drop=RM?0:Math.max(0,scrollY-H);
- im.style.transform=`translate(${x-S*.62}px,${y-S*.40-drop}px) rotate(${a*180/Math.PI+90}deg)`}
+ im.style.transform=`translate(${x-S*.62}px,${y-S*.40-drop}px) rotate(${a*180/Math.PI+90}deg) scale(.6)`}
 let raf=0;addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;render()})},{passive:true});
 addEventListener('resize',()=>{layout();render()});layout();render();addEventListener('load',render)})();
