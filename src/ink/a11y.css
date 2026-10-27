@@ -1,0 +1,171 @@
+html {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-synthesis: none;
+}
+
+#root {
+  min-height: 100%;
+}
+
+.skip {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 80;
+  transform: translateY(-160%);
+  background: #121212;
+  color: #ede7da;
+  padding: 10px 14px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.skip:focus {
+  transform: none;
+}
+
+nav a,
+nav a:link,
+nav a:visited,
+nav a:active,
+nav a:focus {
+  color: #121212;
+  text-decoration: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Anchors with href pick up the browser's blue underline. These replaced inert labels. */
+a.cta:link,
+a.cta:visited,
+a.cta:active,
+a.cta:focus,
+.ns2 a.cta2:link,
+.ns2 a.cta2:visited,
+.ns2 a.cta2:hover,
+.ns2 a.cta2:active,
+.ns2 a.cta2:focus {
+  color: #121212;
+  text-decoration: none;
+}
+
+/* :link still matches while the pointer is over the control, and it ties :hover.
+   The seal-red state has to win that tie for the header and the nav. */
+nav a:hover,
+nav a:link:hover,
+nav a:visited:hover,
+a.cta:hover,
+a.cta:link:hover,
+a.cta:visited:hover {
+  color: #b8321e;
+  text-decoration: none;
+}
+
+.ct a:link,
+.ct a:visited,
+.ct a:active,
+.ct a:focus {
+  color: inherit;
+  text-decoration: none;
+}
+
+.c3 a.big:link,
+.c3 a.big:visited,
+.c3 a.big:hover,
+.c3 a.big:active,
+.c3 a.big:focus,
+.c3 a.big:focus-visible {
+  color: #ede7da;
+  text-decoration: none;
+}
+
+.c3 a.big:focus-visible,
+.c3 a.row:focus-visible {
+  outline: 2px solid #d9553f;
+  outline-offset: 4px;
+}
+
+.ct a.row:hover,
+.ct a.row:focus-visible {
+  color: #b8321e;
+  text-decoration: none;
+}
+
+.pm .inf a:link,
+.pm .inf a:visited,
+.pm .inf a:hover,
+.pm .inf a:focus {
+  color: #121212;
+  text-decoration: none;
+}
+
+nav a.brand {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0;
+  display: flex;
+  gap: 12px;
+}
+
+nav a:focus-visible,
+.cta:focus-visible,
+.cta2:focus-visible {
+  outline: 2px solid #b8321e;
+  outline-offset: 4px;
+}
+
+.cta,
+.cta2,
+.c3 .big,
+.ct .row {
+  min-height: 44px;
+}
+
+.ola .svc h2 {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 500;
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.pm .inf h3 {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 11.5px;
+  letter-spacing: 0.28em;
+  color: #5e5a53;
+  font-weight: 500;
+  margin: 22px 0 10px;
+  text-transform: uppercase;
+}
+
+footer.f2 {
+  background: #121212;
+  color: #9c968b;
+  border-color: #3a3833;
+}
+
+@media (max-width: 600px) {
+  .ola .svc h2 {
+    font-size: 25px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ola .svc {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .b1 .hanko {
+    opacity: 1;
+    transform: rotate(-5deg);
+  }
+}
