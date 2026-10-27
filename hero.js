@@ -23,6 +23,6 @@ function render(){if(mob){im.style.position='';renderM(performance.now());return
  else if(Math.abs(k)>.06){src=f(k>0?'turn-right':'turn-left',Math.min(6,Math.round(Math.abs(k)/.25*6)))}else src=f('swim',Math.floor(d/12)%16);
  if(RM)src=f('swim',0);if(im.dataset.s!==src){im.src=src;im.dataset.s=src}
  const drop=RM?0:Math.max(0,scrollY-H);
- im.style.transform=`translate(${x-S*.62}px,${y-S*.40-drop}px) rotate(${a*180/Math.PI+90}deg) scale(.6)`}
+ im.style.transform=`translate(${x-S*.54}px,${y-S*.34-drop}px) rotate(${a*180/Math.PI+90}deg)`}
 let raf=0;addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;render()})},{passive:true});
 addEventListener('resize',()=>{layout();render()});layout();render();addEventListener('load',render)})();
