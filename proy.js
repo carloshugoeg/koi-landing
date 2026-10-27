@@ -26,7 +26,7 @@ const D=[
  g:[["nut-1","Panel principal"],["nut-2","Agenda de citas"],["nut-3","Pacientes"],["nut-4","Finanzas"]]}];
 const host=document.getElementById('pj2');
 const items=D.map((d,i)=>{const el=document.createElement('article');el.className='pjx';el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-haspopup','dialog');el.setAttribute('aria-label','Ver proyecto '+d.n);
-el.innerHTML=`<img class=pad src="as/pad${i+1}.png" alt=""><img class=stk src="as/stroke${i+1}.png" alt=""><div class=tx><em><span class=seal>${d.s}</span>${d.cat}</em><h3>${d.n}</h3><p>${d.p}</p>${d.t.length?`<ul>${d.t.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}<span class=go>Ver detalle <b>→</b></span></div>`;
+el.innerHTML=`<img class=pad src="as/pad${i+1}.png" alt=""><img class=stk src="as/stroke${i+1}.png" alt=""><div class=tx><em><span class=seal>${d.s}</span>${d.cat}</em><h3>${d.n}</h3><p>${d.p}</p>${d.t.length?`<ul>${d.t.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}<span class=go><span class=gs>${d.g.length} capturas</span>Ver proyecto <b>→</b></span></div>`;
 el.addEventListener('click',()=>open(i,el));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(i,el)}});
 host.appendChild(el);return el});
 let mob;function lay(){mob=innerWidth<600;const W=innerWidth;
