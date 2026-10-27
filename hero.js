@@ -7,7 +7,7 @@ function cr(pts,t){const n=pts.length-1,x=Math.min(.9999,Math.max(0,t))*n,i=x|0,
 function layout(){mob=innerWidth<600;S=mob?330:700;im.style.width=im.style.height=S+'px';
  if(mob){const cx=200,cy=640,r=100;path=t=>{const a=-Math.PI/2+t*2*Math.PI;return[cx+r*Math.cos(a),cy+r*Math.sin(a)]}}
  else{const W=innerWidth,sx=x=>x*W/1440;
-  const pts=[[1160,320],[1048,328],[935,372],[823,458],[710,570],[598,682],[485,768],[373,812],[260,820]].map(([x,y])=>[sx(x),y]);
+  const pts=[[1320,250],[1165,257],[1010,298],[855,377],[700,482],[545,586],[390,665],[235,706],[80,713]].map(([x,y])=>[sx(x),y]);
   path=t=>cr(pts,t)}}
 const ang=t=>{const a=path(Math.max(0,t-.003)),b=path(Math.min(1,t+.003));return Math.atan2(b[1]-a[1],b[0]-a[0])};
 const hm=document.getElementById('hm'),K=.56,IMG=900,CX=500,CY=450,PCX=212,PCY=630;let dist=0,lastY=scrollY;
@@ -16,12 +16,13 @@ function renderM(ts){const t=RM?0:Math.max(0,Math.min(1,scrollY/(hero.offsetHeig
  hm.style.width=hm.style.height=IMG*K+'px';hm.style.transform=`translate(${PCX-CX*K}px,${PCY-CY*K}px) rotate(${-t*360}deg)`}
 function loopM(ts){if(mob){renderM(ts)}if(!RM)requestAnimationFrame(loopM)}requestAnimationFrame(loopM);
 for(let i=0;i<12;i++)new Image().src='circ/'+String(i).padStart(2,'0')+'.png';
-function render(){if(mob){renderM(performance.now());return}const H=hero.offsetHeight,t=RM?0:Math.max(0,Math.min(1,scrollY/H));
+function render(){if(mob){renderM(performance.now());return}im.style.position=RM?'':'fixed';const H=hero.offsetHeight,t=RM?0:Math.max(0,Math.min(1,scrollY/H));
  const [x,y]=path(t),a=ang(t);let k=ang(Math.min(1,t+.02))-ang(Math.max(0,t-.02));k=Math.atan2(Math.sin(k),Math.cos(k));
  const d=t*(mob?660:1100);let src;
  if(mob){const ph=Math.floor(d/14)%8,i=ph<4?3+ph:10-ph;src=(Math.floor(d/120)%3==2)?f('swim',Math.floor(d/10)%16):f('turn-right',i)}
  else if(Math.abs(k)>.06){src=f(k>0?'turn-right':'turn-left',Math.min(6,Math.round(Math.abs(k)/.25*6)))}else src=f('swim',Math.floor(d/12)%16);
  if(RM)src=f('swim',0);if(im.dataset.s!==src){im.src=src;im.dataset.s=src}
- im.style.transform=`translate(${x-S*.45}px,${y-S*.40}px) rotate(${a*180/Math.PI+90}deg)`}
+ const drop=RM?0:Math.max(0,scrollY-H);
+ im.style.transform=`translate(${x-S*.45}px,${y-S*.40-drop}px) rotate(${a*180/Math.PI+90}deg)`}
 let raf=0;addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;render()})},{passive:true});
 addEventListener('resize',()=>{layout();render()});layout();render();addEventListener('load',render)})();
