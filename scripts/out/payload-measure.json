@@ -1,0 +1,25 @@
+{
+  "claim": "Eager unique payload (hero first sequence + ola first sequence + visible pool + brush), not full site disk size.",
+  "before": {
+    "files": 79,
+    "bytes": 8458952,
+    "MB": 8.07
+  },
+  "afterDesktop": {
+    "files": 30,
+    "bytes": 1115948,
+    "MB": 1.06
+  },
+  "afterMobile": {
+    "files": 26,
+    "bytes": 1341170,
+    "MB": 1.28
+  },
+  "reductionDesktop": {
+    "savedMB": 7,
+    "ratio": "13.2% of before"
+  },
+  "limiter": "Network transfer of frame PNGs on first paint; WebP + deferred sequences remove the rest from the critical path.",
+  "runs": 1,
+  "note": "Disk byte sum of unique files the scripts warm before idle. Not a timed Lighthouse run."
+}
