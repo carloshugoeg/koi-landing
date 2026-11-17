@@ -10,6 +10,9 @@
 .pjx p{font-size:15.5px;line-height:1.75;color:#3d3a35;max-width:420px}
 .pjx ul{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;letter-spacing:.06em;color:#5E5A53}
 .pjx li::before{content:"·";color:#B8321E;margin-right:6px}
+.pjx .more{margin-top:14px;font-size:13px;letter-spacing:.08em}
+.pjx .more a{color:#B8321E;text-decoration:none;border-bottom:1px solid transparent}
+.pjx .more a:hover,.pjx .more a:focus-visible{border-color:#B8321E;outline:none}
 .pjx .go{display:inline-flex;align-items:center;gap:10px;margin-top:18px;font-size:14px;letter-spacing:.12em;color:#121212;border-bottom:1px solid #c9c1b1;padding-bottom:4px;transition:border-color .3s,gap .3s}
 .pjx .go b{color:#B8321E;font-weight:400;transition:transform .3s}
 .pjx:hover .tx,.pjx:focus-visible .tx{transform:translateY(-4px)}
