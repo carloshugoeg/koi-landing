@@ -159,15 +159,62 @@ const pages = [
   },
 ];
 
+const localBusiness = {
+  '@type': 'LocalBusiness',
+  '@id': 'https://koisoftware.com/#localbusiness',
+  name: 'Koi Software',
+  url: 'https://koisoftware.com/',
+  image: 'https://koisoftware.com/og.jpg',
+  email: 'info@koisoftware.com',
+  telephone: '+50258713903',
+  areaServed: [
+    { '@type': 'City', name: 'Quetzaltenango' },
+    { '@type': 'Country', name: 'Guatemala' },
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Quetzaltenango',
+    postalCode: '09001',
+    addressCountry: 'GT',
+  },
+  openingHours: 'Mo-Sa 08:00-18:00',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ],
+      opens: '08:00',
+      closes: '18:00',
+    },
+  ],
+  sameAs: [
+    'https://instagram.com/carloshugoeg',
+    'https://www.linkedin.com/in/carloshugoeg',
+  ],
+  parentOrganization: { '@id': 'https://koisoftware.com/#organization' },
+};
+
 const jsonLd = (p) =>
   JSON.stringify({
     '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: p.title,
-    description: p.description,
-    url: p.canonical,
-    isPartOf: { '@type': 'WebSite', name: 'Koi Software', url: 'https://koisoftware.com/' },
-    about: { '@id': 'https://koisoftware.com/#organization' },
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        name: p.title,
+        description: p.description,
+        url: p.canonical,
+        isPartOf: { '@type': 'WebSite', name: 'Koi Software', url: 'https://koisoftware.com/' },
+        about: { '@id': 'https://koisoftware.com/#organization' },
+        provider: { '@id': 'https://koisoftware.com/#localbusiness' },
+      },
+      localBusiness,
+    ],
   });
 
 function render(p) {
