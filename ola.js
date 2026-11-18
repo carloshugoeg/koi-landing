@@ -1,8 +1,18 @@
 (()=>{
 const LIB='koi-lib/',sec=document.querySelector('.ola'),stage=sec.querySelector('.stage'),cv=document.getElementById('wave'),cx=cv.getContext('2d');
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const fr=(s,i)=>LIB+s+'/'+String(i).padStart(2,'0')+'.png';
-['rise','dive','swim'].forEach(s=>{for(let i=0;i<(s=='swim'?16:12);i++)new Image().src=fr(s,i)});
+const EXT=(()=>{const c=document.createElement('canvas');return c.toDataURL('image/webp').startsWith('data:image/webp')?'.webp':'.png'})();
+const fr=(s,i)=>LIB+s+'/'+String(i).padStart(2,'0')+EXT;
+const loaded=new Set();
+function warm(urls){for(const u of urls){if(loaded.has(u))continue;loaded.add(u);const img=new Image();img.src=u}}
+function seq(name,n){return Array.from({length:n},(_,i)=>fr(name,i))}
+function idle(fn){if('requestIdleCallback' in window)requestIdleCallback(fn,{timeout:3500});else setTimeout(fn,1)}
+// First sequence only (rise). Swim + dive when the section nears the viewport or on idle.
+warm(seq('rise',12));
+function warmRest(){warm(seq('swim',16));warm(seq('dive',12))}
+idle(warmRest);
+const near=()=>{const r=sec.getBoundingClientRect();if(r.top<innerHeight*1.4){warmRest();removeEventListener('scroll',near)}};
+addEventListener('scroll',near,{passive:true});near();
 function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 const vn=(()=>{const r=rng(7),g=Array.from({length:512},r);return x=>{const i=Math.floor(x),f=x-i,s=f*f*(3-2*f);return g[i&511]*(1-s)+g[(i+1)&511]*s}})();
 let PV=0,W,H,mob,wy,dwy,PTS,LEAPS,TX;

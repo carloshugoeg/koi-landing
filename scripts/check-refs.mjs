@@ -14,9 +14,15 @@ const deleteOrphans = process.argv.includes('--delete');
 const KEEP = new Set([
   'public/robots.txt',
   'public/sitemap.xml',
+  'public/.htaccess',
   'robots.txt',
   'sitemap.xml',
+  '.htaccess',
   'index.html',
+  // PNG fallbacks kept next to WebP for browsers without WebP (hero/ola EXT detect)
+  'public/as/brush-h.png',
+  'public/pool-desktop-bleed.png',
+  'public/pool-mobile-bleed.png',
 ]);
 
 function walk(dir, acc = []) {
@@ -41,11 +47,25 @@ function norm(raw) {
 
 function literals(text) {
   const out = new Set();
-  const re = /(?:url\(\s*|href\s*=\s*|src\s*=\s*|content\s*=\s*)['"]?([^'")\s>]+)/gi;
+  const re = /(?:url\(\s*|href\s*=\s*|src\s*=\s*|srcset\s*=\s*|content\s*=\s*)['"]?([^'")\s>,]+)/gi;
   let m;
   while ((m = re.exec(text))) {
     const n = norm(m[1]);
-    if (n && !n.includes('$') && !n.includes('{') && /\.[a-z0-9]+$/i.test(n)) out.add(n);
+    if (!n || n.includes('$') || n.includes('{')) continue;
+    if (/\.[a-z0-9]+$/i.test(n)) out.add(n);
+  }
+  const hrefRe = /href\s*=\s*['"]?([^'")\s>]+)/gi;
+  while ((m = hrefRe.exec(text))) {
+    const n = norm(m[1]);
+    if (!n || n.includes('#') || n.includes('$') || n.includes('{') || /\.[a-z0-9]+$/i.test(n)) continue;
+    if (/^(servicios|productos)\//.test(n)) out.add(n.replace(/\/?$/, '/') + 'index.html');
+  }
+  // Product detail pages linked from proy.js template
+  if (text.includes('/productos/') && text.includes("{k:'")) {
+    for (const m2 of text.matchAll(/\{k:'([a-z]+)'/g)) {
+      const slug = m2[1] === 'pos' ? 'koipos' : m2[1] === 'crm' ? 'koicrm' : m2[1];
+      out.add(`productos/${slug}/index.html`);
+    }
   }
   const manifestIcons = /"src"\s*:\s*"([^"]+)"/g;
   while ((m = manifestIcons.exec(text))) {
@@ -61,25 +81,31 @@ function pad(i) {
 
 function dynamics(text) {
   const out = new Set();
-  const frame = text.includes('koi-lib/')
-    ? [...text.matchAll(/\['([^\]]+)'\]\.forEach\(s=>\{for\(let i=0;i<\(s=='swim'\?(\d+):(\d+)\);i\+\+\)/g)]
-    : [];
-  for (const m of frame) {
-    const names = m[1].split(',').map((s) => s.replace(/'/g, ''));
-    const swimN = Number(m[2]);
-    const otherN = Number(m[3]);
-    for (const name of names) {
-      const n = name === 'swim' ? swimN : otherN;
-      for (let i = 0; i < n; i++) out.add(`koi-lib/${name}/${pad(i)}.png`);
+  const addFrames = (name, n, ext = 'webp') => {
+    for (let i = 0; i < n; i++) out.add(`koi-lib/${name}/${pad(i)}.${ext}`);
+  };
+  // hero / ola frame loops (webp primary, png fallback kept on disk)
+  if (text.includes("frame('swim'") || text.includes('koi-lib/')) {
+    for (const name of ['swim', 'turn-left', 'turn-right', 'rise', 'dive']) {
+      const n = name === 'swim' ? 16 : 12;
+      if (text.includes(name) || text.includes(`'${name}'`)) {
+        addFrames(name, n, 'webp');
+        addFrames(name, n, 'png');
+      }
     }
   }
-  if (/circ\/'\+pad\(/.test(text) || /circ\/'\+String\(Math\.min\(11/.test(text) || /src="circ\/"/.test(text)) {
-    for (let i = 0; i < 12; i++) out.add(`circ/${pad(i)}.png`);
+  if (text.includes('circ/') || text.includes("circ(")) {
+    for (let i = 0; i < 12; i++) {
+      out.add(`circ/${pad(i)}.webp`);
+      out.add(`circ/${pad(i)}.png`);
+    }
   }
-  if (text.includes('as/pad${i+1}.png')) {
-    const projects = (text.match(/\{k:'/g) || []).length;
+  if (text.includes('as/pad${i+1}') || text.includes('as/pad')) {
+    const projects = (text.match(/\{k:'/g) || []).length || 4;
     for (let i = 1; i <= projects; i++) {
+      out.add(`as/pad${i}.webp`);
       out.add(`as/pad${i}.png`);
+      out.add(`as/stroke${i}.webp`);
       out.add(`as/stroke${i}.png`);
     }
   }
