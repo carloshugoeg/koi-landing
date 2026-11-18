@@ -26,4 +26,6 @@ dist-ssr
 # Python
 .venv/
 __pycache__/
-scripts/out/evidence/*.zip
+
+# Generated check/report artifacts (Lighthouse, screenshots, JSON dumps)
+scripts/out/
