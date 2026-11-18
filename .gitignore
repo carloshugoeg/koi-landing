@@ -26,3 +26,4 @@ dist-ssr
 # Python
 .venv/
 __pycache__/
+scripts/out/evidence/*.zip
