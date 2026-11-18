@@ -13,9 +13,9 @@ const pub = join(repo, 'public');
 const pages = [
   {
     path: 'servicios/software-a-la-medida/index.html',
-    title: 'Software a la medida | Koi Software',
+    title: 'Software a la medida en Guatemala | Koi Software',
     description:
-      'Diseñamos y construimos sistemas a la medida para cómo opera tu negocio en Guatemala: POS, CRM y plataformas internas.',
+      'Desarrollo de software a la medida en Guatemala: POS, CRM y plataformas internas, construidos alrededor de cómo opera tu negocio.',
     canonical: 'https://koisoftware.com/servicios/software-a-la-medida/',
     h1: 'Software a la medida',
     lead: 'Sistemas construidos alrededor de tu operación, no al revés.',
@@ -32,11 +32,11 @@ const pages = [
   },
   {
     path: 'servicios/automatizacion/index.html',
-    title: 'Automatización de procesos | Koi Software',
+    title: 'Automatización de procesos en Guatemala | Koi Software',
     description:
-      'Conectamos herramientas y quitamos trabajo repetitivo de la operación diaria. Automatización para negocios locales en Guatemala.',
+      'Automatizamos procesos en Guatemala: conectamos WhatsApp, hojas de cálculo y sistemas internos para quitar el trabajo repetitivo.',
     canonical: 'https://koisoftware.com/servicios/automatizacion/',
-    h1: 'Automatización',
+    h1: 'Automatización de procesos',
     lead: 'Menos fricción entre las herramientas que ya usas.',
     body: [
       'Conectamos sistemas para que la información no se copie a mano entre WhatsApp, hojas de cálculo y paneles internos.',
@@ -50,11 +50,11 @@ const pages = [
   },
   {
     path: 'servicios/asistentes-de-ia/index.html',
-    title: 'Asistentes de IA | Koi Software',
+    title: 'Chatbot WhatsApp y asistentes de IA | Koi Software',
     description:
-      'Asistentes que responden y agendan en los canales donde ya están tus clientes: WhatsApp, web y más.',
+      'Chatbot y asistentes de IA en WhatsApp para negocios en Guatemala: responden, toman datos y agendan citas, con una persona al tanto.',
     canonical: 'https://koisoftware.com/servicios/asistentes-de-ia/',
-    h1: 'Asistentes de IA',
+    h1: 'Asistentes de IA para WhatsApp',
     lead: 'Atención en los canales donde ya te escriben.',
     body: [
       'Armamos asistentes que responden y agendan donde ya están tus clientes, sin pedirles que instalen otra app.',
@@ -68,11 +68,11 @@ const pages = [
   },
   {
     path: 'servicios/restaurantes-pos/index.html',
-    title: 'Software para restaurantes y POS | Koi Software',
+    title: 'Software para restaurantes en Guatemala | Koi Software',
     description:
-      'Puntos de venta y operación para kioscos y restaurantes: pedidos, caja, inventario y reportes. Hecho en Guatemala.',
+      'Software y punto de venta para restaurantes y kioscos en Guatemala: pedidos, caja, inventario, recetas y facturación electrónica FEL.',
     canonical: 'https://koisoftware.com/servicios/restaurantes-pos/',
-    h1: 'Restaurantes y POS',
+    h1: 'Software para restaurantes y POS',
     lead: 'Del kiosco a la caja, en un solo sistema.',
     body: [
       'KoiPOS nació para kioscos con varias sucursales: el pedido se toma en el kiosco, la caja abre y cierra con conteo físico, y el inventario descuenta insumos según las recetas.',
@@ -87,11 +87,11 @@ const pages = [
   },
   {
     path: 'productos/koins/index.html',
-    title: 'Koins | Club de fans sin app | Koi Software',
+    title: 'Koins | Tarjeta de lealtad digital | Koi Software',
     description:
-      'Koins es el club de fans de tu negocio: sellos o puntos sin app ni cuenta. El cliente escanea un QR; el personal registra cada visita.',
+      'Tarjeta de lealtad digital sin app ni cuenta: sellos o puntos, el cliente se une con un QR y el personal registra cada visita.',
     canonical: 'https://koisoftware.com/productos/koins/',
-    h1: 'Koins',
+    h1: 'Tarjeta de lealtad digital, sin app ni cuenta',
     lead: 'El club de fans de tu negocio, sin app ni cuenta.',
     body: [
       'Tarjeta de sellos o de puntos según el monto en quetzales. El cliente se une con un QR; el personal sella con PIN y puede deshacer durante diez minutos.',
@@ -105,11 +105,11 @@ const pages = [
   },
   {
     path: 'productos/koicrm/index.html',
-    title: 'KoiCRM | CRM de marca blanca | Koi Software',
+    title: 'CRM de marca blanca en Guatemala | Koi Software',
     description:
-      'KoiCRM: embudo configurable, clientes, calendario, cotizaciones y estadísticas por asesor. Marca blanca para varias empresas.',
+      'CRM de marca blanca en Guatemala: embudo, clientes, calendario, cotizaciones y estadísticas por asesor, con datos aislados por empresa.',
     canonical: 'https://koisoftware.com/productos/koicrm/',
-    h1: 'KoiCRM',
+    h1: 'CRM de marca blanca para tu empresa',
     lead: 'Cada cliente y cada seguimiento, en un solo lugar.',
     body: [
       'CRM de marca blanca para varias empresas. Cada una trabaja con su propio embudo, catálogos y campos; los datos quedan aislados del resto.',
@@ -123,11 +123,11 @@ const pages = [
   },
   {
     path: 'productos/nutrea/index.html',
-    title: 'Nutrea | Software para clínicas de nutrición | Koi Software',
+    title: 'Nutrea | Software para nutricionistas | Koi Software',
     description:
-      'Nutrea reúne expediente, citas, consultas con mediciones y plan nutricional, e ingresos de la clínica en un solo sistema.',
+      'Software para nutricionistas: expediente, citas, mediciones, plan nutricional en PDF e ingresos de la clínica en un solo sistema.',
     canonical: 'https://koisoftware.com/productos/nutrea/',
-    h1: 'Nutrea',
+    h1: 'Nutrea: software para nutricionistas',
     lead: 'La consulta nutricional, sin papeleo disperso.',
     body: [
       'Expediente del paciente con datos personales, estilo de vida y perfil clínico. Agenda de citas con estados, incluida la inasistencia.',
@@ -143,9 +143,9 @@ const pages = [
     path: 'productos/koipos/index.html',
     title: 'KoiPOS | Punto de venta para kioscos | Koi Software',
     description:
-      'KoiPOS: kiosco y pedidos, caja con cortes, inventario por sucursal, recetas e insumos, reportes CSV y facturación FEL.',
+      'Punto de venta para kioscos con varias sucursales: pedidos, cortes de caja, inventario por recetas y facturación FEL en Guatemala.',
     canonical: 'https://koisoftware.com/productos/koipos/',
-    h1: 'KoiPOS',
+    h1: 'KoiPOS: punto de venta para kioscos',
     lead: 'Punto de venta para kioscos con varias sucursales.',
     body: [
       'El pedido se toma en el kiosco, la caja se abre y se cierra con conteo físico, y el inventario descuenta insumos según las recetas de cada producto.',
@@ -232,7 +232,7 @@ function render(p) {
 <link rel=canonical href="${p.canonical}">
 <meta name=theme-color content="#EDE7DA">
 <meta name=color-scheme content="only light">
-<meta property=og:title content="${p.h1} | Koi Software">
+<meta property=og:title content="${p.title}">
 <meta property=og:description content="${p.description}">
 <meta property=og:url content="${p.canonical}">
 <meta property=og:type content=website>
@@ -241,7 +241,7 @@ function render(p) {
 <meta property=og:image:height content=630>
 <meta property=og:image:alt content="Koi Software. Software hecho a la medida.">
 <meta name=twitter:card content=summary_large_image>
-<meta name=twitter:title content="${p.h1} | Koi Software">
+<meta name=twitter:title content="${p.title}">
 <meta name=twitter:description content="${p.description}">
 <meta name=twitter:image content="https://koisoftware.com/og.jpg">
 <link rel=icon href="/favicon/icon.svg" type="image/svg+xml">
