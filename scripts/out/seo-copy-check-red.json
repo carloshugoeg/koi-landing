@@ -1,0 +1,53 @@
+{
+  "failed": 9,
+  "passed": 0,
+  "titleMax": 60,
+  "descMax": 155,
+  "checks": [
+    {
+      "id": "copy-home",
+      "ok": false,
+      "detail": "title=\"Koi Software | software a la medida · Quetzaltenango\" (len 52, want \"Software a la medida en Quetzaltenango | Koi Software\"); h1=\"Software a la medida en Quetzaltenango.\" want \"Software hecho a la medida en Quetzaltenango.\"; og title/desc mismatch (og:title=\"Koi Software | software a la medida · Quetzaltenango\"); twitter title/desc mismatch (twitter:title=\"Koi Software | software a la medida · Quetzaltenango\")"
+    },
+    {
+      "id": "copy-servicios-software-a-la-medida",
+      "ok": false,
+      "detail": "title=\"Software a la medida | Koi Software\" (len 35, want \"Software a la medida en Guatemala | Koi Software\"); description len=118 mismatch=true; og title/desc mismatch (og:title=\"Software a la medida | Koi Software\"); twitter title/desc mismatch (twitter:title=\"Software a la medida | Koi Software\")"
+    },
+    {
+      "id": "copy-servicios-automatizacion",
+      "ok": false,
+      "detail": "title=\"Automatización de procesos | Koi Software\" (len 41, want \"Automatización de procesos en Guatemala | Koi Software\"); description len=128 mismatch=true; h1=\"Automatización\" want \"Automatización de procesos\"; og title/desc mismatch (og:title=\"Automatización | Koi Software\"); twitter title/desc mismatch (twitter:title=\"Automatización | Koi Software\")"
+    },
+    {
+      "id": "copy-servicios-asistentes-de-ia",
+      "ok": false,
+      "detail": "title=\"Asistentes de IA | Koi Software\" (len 31, want \"Chatbot WhatsApp y asistentes de IA | Koi Software\"); description len=99 mismatch=true; h1=\"Asistentes de IA\" want \"Asistentes de IA para WhatsApp\"; og title/desc mismatch (og:title=\"Asistentes de IA | Koi Software\"); twitter title/desc mismatch (twitter:title=\"Asistentes de IA | Koi Software\")"
+    },
+    {
+      "id": "copy-servicios-restaurantes-pos",
+      "ok": false,
+      "detail": "title=\"Software para restaurantes y POS | Koi Software\" (len 47, want \"Software para restaurantes en Guatemala | Koi Software\"); description len=114 mismatch=true; h1=\"Restaurantes y POS\" want \"Software para restaurantes y POS\"; og title/desc mismatch (og:title=\"Restaurantes y POS | Koi Software\"); twitter title/desc mismatch (twitter:title=\"Restaurantes y POS | Koi Software\")"
+    },
+    {
+      "id": "copy-productos-koipos",
+      "ok": false,
+      "detail": "description len=118 mismatch=true; h1=\"KoiPOS\" want \"KoiPOS: punto de venta para kioscos\"; og title/desc mismatch (og:title=\"KoiPOS | Koi Software\"); twitter title/desc mismatch (twitter:title=\"KoiPOS | Koi Software\")"
+    },
+    {
+      "id": "copy-productos-koicrm",
+      "ok": false,
+      "detail": "title=\"KoiCRM | CRM de marca blanca | Koi Software\" (len 43, want \"CRM de marca blanca en Guatemala | Koi Software\"); description len=125 mismatch=true; h1=\"KoiCRM\" want \"CRM de marca blanca para tu empresa\"; og title/desc mismatch (og:title=\"KoiCRM | Koi Software\"); twitter title/desc mismatch (twitter:title=\"KoiCRM | Koi Software\")"
+    },
+    {
+      "id": "copy-productos-koins",
+      "ok": false,
+      "detail": "title=\"Koins | Club de fans sin app | Koi Software\" (len 43, want \"Koins | Tarjeta de lealtad digital | Koi Software\"); description len=134 mismatch=true; h1=\"Koins\" want \"Tarjeta de lealtad digital, sin app ni cuenta\"; og title/desc mismatch (og:title=\"Koins | Koi Software\"); twitter title/desc mismatch (twitter:title=\"Koins | Koi Software\")"
+    },
+    {
+      "id": "copy-productos-nutrea",
+      "ok": false,
+      "detail": "title=\"Nutrea | Software para clínicas de nutrición | Koi Software\" (len 59, want \"Nutrea | Software para nutricionistas | Koi Software\"); description len=121 mismatch=true; h1=\"Nutrea\" want \"Nutrea: software para nutricionistas\"; og title/desc mismatch (og:title=\"Nutrea | Koi Software\"); twitter title/desc mismatch (twitter:title=\"Nutrea | Koi Software\")"
+    }
+  ]
+}
