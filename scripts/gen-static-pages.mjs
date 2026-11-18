@@ -25,9 +25,9 @@ const pages = [
       'Trabajamos ronda por ronda, con entregas que puedes usar en el día a día.',
     ],
     related: [
-      ['/servicios/restaurantes-pos/', 'Restaurantes / POS'],
-      ['/productos/koicrm/', 'KoiCRM'],
-      ['/productos/nutrea/', 'Nutrea'],
+      ['https://koisoftware.com/servicios/restaurantes-pos/', 'Restaurantes / POS'],
+      ['https://koisoftware.com/productos/koicrm/', 'KoiCRM'],
+      ['https://koisoftware.com/productos/nutrea/', 'Nutrea'],
     ],
   },
   {
@@ -44,8 +44,8 @@ const pages = [
       'Si ya tienes un flujo, lo ordenamos. Si no, lo diseñamos contigo a partir de cómo atiendes hoy.',
     ],
     related: [
-      ['/servicios/asistentes-de-ia/', 'Asistentes de IA'],
-      ['/servicios/software-a-la-medida/', 'Software a la medida'],
+      ['https://koisoftware.com/servicios/asistentes-de-ia/', 'Asistentes de IA'],
+      ['https://koisoftware.com/servicios/software-a-la-medida/', 'Software a la medida'],
     ],
   },
   {
@@ -62,8 +62,8 @@ const pages = [
       'El alcance se define contigo: tono, horarios y qué puede resolver solo el asistente.',
     ],
     related: [
-      ['/servicios/automatizacion/', 'Automatización'],
-      ['/productos/koicrm/', 'KoiCRM'],
+      ['https://koisoftware.com/servicios/automatizacion/', 'Automatización'],
+      ['https://koisoftware.com/productos/koicrm/', 'KoiCRM'],
     ],
   },
   {
@@ -80,9 +80,9 @@ const pages = [
       'Si tu operación es distinta, partimos del mismo enfoque: software a la medida de cómo cocinas y cobras.',
     ],
     related: [
-      ['/productos/koipos/', 'KoiPOS'],
-      ['/productos/koins/', 'Koins'],
-      ['/servicios/software-a-la-medida/', 'Software a la medida'],
+      ['https://koisoftware.com/productos/koipos/', 'KoiPOS'],
+      ['https://koisoftware.com/productos/koins/', 'Koins'],
+      ['https://koisoftware.com/servicios/software-a-la-medida/', 'Software a la medida'],
     ],
   },
   {
@@ -99,8 +99,8 @@ const pages = [
       'Registra el origen de cada cliente: mostrador, póster o mesa.',
     ],
     related: [
-      ['/productos/koipos/', 'KoiPOS'],
-      ['/servicios/restaurantes-pos/', 'Restaurantes / POS'],
+      ['https://koisoftware.com/productos/koipos/', 'KoiPOS'],
+      ['https://koisoftware.com/servicios/restaurantes-pos/', 'Restaurantes / POS'],
     ],
   },
   {
@@ -117,8 +117,8 @@ const pages = [
       'Logo, colores y nombre propios por empresa, con roles y permisos.',
     ],
     related: [
-      ['/servicios/software-a-la-medida/', 'Software a la medida'],
-      ['/servicios/asistentes-de-ia/', 'Asistentes de IA'],
+      ['https://koisoftware.com/servicios/software-a-la-medida/', 'Software a la medida'],
+      ['https://koisoftware.com/servicios/asistentes-de-ia/', 'Asistentes de IA'],
     ],
   },
   {
@@ -135,8 +135,8 @@ const pages = [
       'Finanzas ligadas a consultas y planes, reportes exportables y equipo con roles y marca propia.',
     ],
     related: [
-      ['/servicios/software-a-la-medida/', 'Software a la medida'],
-      ['/productos/koicrm/', 'KoiCRM'],
+      ['https://koisoftware.com/servicios/software-a-la-medida/', 'Software a la medida'],
+      ['https://koisoftware.com/productos/koicrm/', 'KoiCRM'],
     ],
   },
   {
@@ -153,8 +153,8 @@ const pages = [
       'Exportación de facturación electrónica FEL cuando tu operación lo requiere.',
     ],
     related: [
-      ['/servicios/restaurantes-pos/', 'Restaurantes / POS'],
-      ['/productos/koins/', 'Koins'],
+      ['https://koisoftware.com/servicios/restaurantes-pos/', 'Restaurantes / POS'],
+      ['https://koisoftware.com/productos/koins/', 'Koins'],
     ],
   },
 ];
@@ -248,7 +248,9 @@ function render(p) {
 <link rel=icon href="/favicon.ico" sizes=any>
 <link rel=apple-touch-icon sizes=180x180 href="/favicon/apple-touch-icon.png">
 <link rel=manifest href="/site.webmanifest">
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel=stylesheet>
+<link rel=preload href="/fonts/shippori-mincho-500.woff2" as=font type=font/woff2 crossorigin>
+<link rel=preload href="/fonts/zen-kaku-gothic-new-400.woff2" as=font type=font/woff2 crossorigin>
+<style>@font-face{font-family:'Shippori Mincho';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/shippori-mincho-400.woff2) format('woff2')}@font-face{font-family:'Shippori Mincho';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/shippori-mincho-500.woff2) format('woff2')}@font-face{font-family:'Shippori Mincho';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/shippori-mincho-700.woff2) format('woff2')}@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/zen-kaku-gothic-new-400.woff2) format('woff2')}@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/zen-kaku-gothic-new-500.woff2) format('woff2')}@font-face{font-family:'Zen Kaku Gothic New';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/zen-kaku-gothic-new-700.woff2) format('woff2')}</style>
 <script type=application/ld+json>${jsonLd(p)}</script>
 <style>
 *{margin:0;box-sizing:border-box}
@@ -296,12 +298,12 @@ footer.ft{display:block;background:#121212;color:#EDE7DA;padding:72px 110px 34px
 </head>
 <body>
 <header class=top>
-  <b><a href="/"><span class=seal style="width:36px;height:36px;font-size:18px">鯉</span>Koi Software</a></b>
+  <b><a href="https://koisoftware.com/"><span class=seal style="width:36px;height:36px;font-size:18px">鯉</span>Koi Software</a></b>
   <nav aria-label=Principal>
-    <a href="/#pj2">Trabajo</a>
-    <a href="/#servicios">Servicios</a>
-    <a href="/#ns">Nosotros</a>
-    <a href="/#contacto">Hablemos</a>
+    <a href="https://koisoftware.com/#pj2">Trabajo</a>
+    <a href="https://koisoftware.com/#servicios">Servicios</a>
+    <a href="https://koisoftware.com/#ns">Nosotros</a>
+    <a href="https://koisoftware.com/#contacto">Hablemos</a>
   </nav>
 </header>
 <main class=page>
@@ -324,17 +326,17 @@ footer.ft{display:block;background:#121212;color:#EDE7DA;padding:72px 110px 34px
     <nav aria-label="Pie de página">
       <p class=col-label>NAVEGACIÓN</p>
       <ul>
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/#servicios">Servicios</a></li>
-        <li><a href="/servicios/software-a-la-medida/">Software a la medida</a></li>
-        <li><a href="/servicios/automatizacion/">Automatización</a></li>
-        <li><a href="/servicios/asistentes-de-ia/">Asistentes de IA</a></li>
-        <li><a href="/servicios/restaurantes-pos/">Restaurantes / POS</a></li>
-        <li><a href="/productos/koipos/">KoiPOS</a></li>
-        <li><a href="/productos/koicrm/">KoiCRM</a></li>
-        <li><a href="/productos/koins/">Koins</a></li>
-        <li><a href="/productos/nutrea/">Nutrea</a></li>
-        <li><a href="/#contacto">Contacto</a></li>
+        <li><a href="https://koisoftware.com/">Inicio</a></li>
+        <li><a href="https://koisoftware.com/#servicios">Servicios</a></li>
+        <li><a href="https://koisoftware.com/servicios/software-a-la-medida/">Software a la medida</a></li>
+        <li><a href="https://koisoftware.com/servicios/automatizacion/">Automatización</a></li>
+        <li><a href="https://koisoftware.com/servicios/asistentes-de-ia/">Asistentes de IA</a></li>
+        <li><a href="https://koisoftware.com/servicios/restaurantes-pos/">Restaurantes / POS</a></li>
+        <li><a href="https://koisoftware.com/productos/koipos/">KoiPOS</a></li>
+        <li><a href="https://koisoftware.com/productos/koicrm/">KoiCRM</a></li>
+        <li><a href="https://koisoftware.com/productos/koins/">Koins</a></li>
+        <li><a href="https://koisoftware.com/productos/nutrea/">Nutrea</a></li>
+        <li><a href="https://koisoftware.com/#contacto">Contacto</a></li>
       </ul>
     </nav>
     <div>

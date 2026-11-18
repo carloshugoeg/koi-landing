@@ -1,0 +1,139 @@
+{
+  "results": [
+    {
+      "dir": "public/circ",
+      "n": 12,
+      "before": 912170,
+      "after": 783686,
+      "saved": 128484
+    },
+    {
+      "dir": "public/koi-lib/swim",
+      "n": 16,
+      "before": 576518,
+      "after": 499390,
+      "saved": 77128
+    },
+    {
+      "dir": "public/koi-lib/rise",
+      "n": 12,
+      "before": 312164,
+      "after": 290480,
+      "saved": 21684
+    },
+    {
+      "dir": "public/koi-lib/turn-left",
+      "n": 12,
+      "before": 435002,
+      "after": 377290,
+      "saved": 57712
+    },
+    {
+      "dir": "public/koi-lib/turn-right",
+      "n": 12,
+      "before": 437648,
+      "after": 379508,
+      "saved": 58140
+    },
+    {
+      "dir": "public/koi-lib/dive",
+      "n": 12,
+      "before": 311992,
+      "after": 290760,
+      "saved": 21232
+    },
+    {
+      "dir": "public/as",
+      "n": 9,
+      "before": 369768,
+      "after": 362770,
+      "saved": 6998
+    }
+  ],
+  "pools": [
+    {
+      "name": "public/pool-mobile-bleed-w390.webp",
+      "size": 95250,
+      "w": 390,
+      "ext": "webp"
+    },
+    {
+      "name": "public/pool-mobile-bleed-w390.avif",
+      "size": 11254,
+      "w": 390,
+      "ext": "avif"
+    },
+    {
+      "name": "public/pool-mobile-bleed-w390.webp",
+      "size": 95250,
+      "w": 390,
+      "ext": "webp"
+    },
+    {
+      "name": "public/pool-mobile-bleed-w390.avif",
+      "size": 11254,
+      "w": 390,
+      "ext": "avif"
+    },
+    {
+      "name": "public/pool-mobile-bleed.webp",
+      "size": 95250,
+      "w": 390,
+      "ext": "webp"
+    },
+    {
+      "name": "public/pool-mobile-bleed.avif",
+      "size": 11254,
+      "w": 390,
+      "ext": "avif"
+    },
+    {
+      "name": "public/pool-desktop-bleed-w768.webp",
+      "size": 85350,
+      "w": 768,
+      "ext": "webp"
+    },
+    {
+      "name": "public/pool-desktop-bleed-w768.avif",
+      "size": 9821,
+      "w": 768,
+      "ext": "avif"
+    },
+    {
+      "name": "public/pool-desktop-bleed-w1080.webp",
+      "size": 145480,
+      "w": 1080,
+      "ext": "webp"
+    },
+    {
+      "name": "public/pool-desktop-bleed-w1080.avif",
+      "size": 16091,
+      "w": 1080,
+      "ext": "avif"
+    },
+    {
+      "name": "public/pool-desktop-bleed-w1440.webp",
+      "size": 206064,
+      "w": 1440,
+      "ext": "webp"
+    },
+    {
+      "name": "public/pool-desktop-bleed-w1440.avif",
+      "size": 14736,
+      "w": 1440,
+      "ext": "avif"
+    },
+    {
+      "name": "public/pool-desktop-bleed.webp",
+      "size": 206064,
+      "w": 1440,
+      "ext": "webp"
+    },
+    {
+      "name": "public/pool-desktop-bleed.avif",
+      "size": 14736,
+      "w": 1440,
+      "ext": "avif"
+    }
+  ]
+}

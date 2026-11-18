@@ -1,0 +1,94 @@
+{
+  "root": ".",
+  "failed": 0,
+  "passed": 17,
+  "budgetBytes": 1572864,
+  "payloadBytes": 998680,
+  "checks": [
+    {
+      "id": "no-render-blocking-font-css",
+      "ok": true,
+      "detail": "ok"
+    },
+    {
+      "id": "lcp-preload-fetchpriority",
+      "ok": true,
+      "detail": "ok"
+    },
+    {
+      "id": "img-width-height",
+      "ok": true,
+      "detail": "ok (10 imgs)"
+    },
+    {
+      "id": "title-len-le-60",
+      "ok": true,
+      "detail": "len=52 title=\"Koi Software | software a la medida · Quetzaltenango\""
+    },
+    {
+      "id": "title-has-required-phrases",
+      "ok": true,
+      "detail": "Koi Software | software a la medida · Quetzaltenango"
+    },
+    {
+      "id": "twitter-eq-og",
+      "ok": true,
+      "detail": "ok"
+    },
+    {
+      "id": "h1-quetzaltenango",
+      "ok": true,
+      "detail": "h1=\"Software a la medida en Quetzaltenango.\""
+    },
+    {
+      "id": "jsonld-logo-absolute",
+      "ok": true,
+      "detail": "https://koisoftware.com/favicon/icon-512.png"
+    },
+    {
+      "id": "404-html-exists",
+      "ok": true,
+      "detail": "public/404.html"
+    },
+    {
+      "id": "htaccess-errordocument-404",
+      "ok": true,
+      "detail": "ErrorDocument 404 /404.html"
+    },
+    {
+      "id": "htaccess-no-force-https",
+      "ok": true,
+      "detail": "ok"
+    },
+    {
+      "id": "htaccess-www-to-apex",
+      "ok": true,
+      "detail": "www→apex rule"
+    },
+    {
+      "id": "htaccess-cache-headers",
+      "ok": true,
+      "detail": "short HTML + long static Cache-Control"
+    },
+    {
+      "id": "no-http-or-slashless-internal",
+      "ok": true,
+      "detail": "ok"
+    },
+    {
+      "id": "home-payload-under-budget",
+      "ok": true,
+      "detail": "0.95 MB / budget 1.50 MB (52 files)"
+    },
+    {
+      "id": "no-forced-reflow-ink-script",
+      "ok": true,
+      "detail": "ok"
+    },
+    {
+      "id": "self-hosted-woff2",
+      "ok": true,
+      "detail": "fonts: shippori-mincho-400.woff2, shippori-mincho-500.woff2, shippori-mincho-700.woff2, zen-kaku-gothic-new-400.woff2, zen-kaku-gothic-new-500.woff2, zen-kaku-gothic-new-700.woff2"
+    }
+  ]
+}

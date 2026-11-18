@@ -14,10 +14,9 @@ let narrow=innerWidth<600;
 if(narrow)warm(range(12,circ));
 else warm(range(16,i=>frame('swim',i)));
 idle(()=>{
-  warm(range(16,i=>frame('swim',i)));
-  warm(range(12,circ));
-  warm(range(12,i=>frame('turn-left',i)));
-  warm(range(12,i=>frame('turn-right',i)));
+  // Opposite viewport sequence only; turns warm on first need in renderDesktop.
+  if(narrow)warm(range(16,i=>frame('swim',i)));
+  else warm(range(12,circ));
 });
 
 const P=[[1000,560],[780,500],[520,640],[260,600]];

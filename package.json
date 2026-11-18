@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && cp ola.js hero.js proy.js nos2.js ct.js proy.css nos2.css ct.css dist/",
+    "build": "tsc -b && vite build && cp ola.js hero.js proy.js nos2.js ct.js proy.css nos2.css ct.css dist/ && node scripts/fix-dist-static.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "optimize:static-assets": "node scripts/optimize-static-assets.mjs",
