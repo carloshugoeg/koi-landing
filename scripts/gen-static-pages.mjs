@@ -20,7 +20,7 @@ const pages = [
     h1: 'Software a la medida',
     lead: 'Sistemas construidos alrededor de tu operación, no al revés.',
     body: [
-      'En el sitio principal lo decimos así: software para cómo trabaja tu negocio — puntos de venta, CRM y plataformas internas.',
+      'Hacemos software para cómo trabaja tu negocio: puntos de venta, CRM y plataformas internas.',
       'Partimos de una primera conversación sobre tu operación. Después armamos un preview que puedes probar antes de aprobar el resto.',
       'Trabajamos ronda por ronda, con entregas que puedes usar en el día a día.',
     ],
@@ -273,7 +273,6 @@ h1{font-family:'Shippori Mincho',serif;font-weight:500;font-size:48px;line-heigh
 .related a:hover{border-color:#B8321E}
 .cta{display:inline-flex;gap:14px;align-items:center;font-size:15px;letter-spacing:.1em;margin-top:36px;text-decoration:none}
 .cta i{width:56px;height:1px;background:#121212}
-.draft{margin-top:40px;font-size:12px;letter-spacing:.08em;color:#9C968B}
 footer.ft{display:block;background:#121212;color:#EDE7DA;padding:72px 110px 34px;font-size:15px}
 .ft .top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px}
 .ft .brand b{font-family:'Shippori Mincho',serif;font-weight:500;font-size:22px;display:flex;gap:12px;align-items:center}
@@ -311,7 +310,6 @@ footer.ft{display:block;background:#121212;color:#EDE7DA;padding:72px 110px 34px
   <p class=lead>${p.lead}</p>
   <div class=prose>${paras}</div>
   <a class=cta href="https://wa.me/50258713903" target=_blank rel=noopener><i></i>Hablemos por WhatsApp</a>
-  <p class=draft>Copy borrador — revisión de Carlos</p>
   <aside class=related>
     <p class=col-label>TAMBIÉN</p>
     <ul>${related}</ul>
