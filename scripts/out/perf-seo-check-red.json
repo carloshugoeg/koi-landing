@@ -1,0 +1,94 @@
+{
+  "root": ".",
+  "failed": 14,
+  "passed": 3,
+  "budgetBytes": 1572864,
+  "payloadBytes": 2200094,
+  "checks": [
+    {
+      "id": "no-render-blocking-font-css",
+      "ok": false,
+      "detail": "Google Fonts stylesheet still render-blocking in <head>"
+    },
+    {
+      "id": "lcp-preload-fetchpriority",
+      "ok": false,
+      "detail": "missing <link rel=preload as=image> for pool bleed with fetchpriority=high"
+    },
+    {
+      "id": "img-width-height",
+      "ok": false,
+      "detail": "6 img(s) missing width/height: <img class=k alt=\"\">"
+    },
+    {
+      "id": "title-len-le-60",
+      "ok": false,
+      "detail": "len=78 title=\"Koi Software | Desarrollo de software a la medida en Quetzaltenango, Guatemala\""
+    },
+    {
+      "id": "title-has-required-phrases",
+      "ok": true,
+      "detail": "Koi Software | Desarrollo de software a la medida en Quetzaltenango, Guatemala"
+    },
+    {
+      "id": "twitter-eq-og",
+      "ok": false,
+      "detail": "twitter:title=\"Software hecho a la medida.\" vs og:title=\"Koi Software | Desarrollo de software a la medida en Quetzaltenango, Guatemala\"; twitter:description=\"Estudio de software en Guatemala. Sistemas tranquilos y precisos para negocios locales.\" vs og:description=\"Estudio de software en Quetzaltenango, Guatemala. Sistemas a la medida, automatización, asistentes de IA y puntos de venta para negocios locales.\""
+    },
+    {
+      "id": "h1-quetzaltenango",
+      "ok": false,
+      "detail": "h1=\"Software hecho a la medida.\""
+    },
+    {
+      "id": "jsonld-logo-absolute",
+      "ok": false,
+      "detail": "logo still points at og.jpg (social card), use a real logo asset: https://koisoftware.com/og.jpg"
+    },
+    {
+      "id": "404-html-exists",
+      "ok": false,
+      "detail": "missing public/404.html"
+    },
+    {
+      "id": "htaccess-errordocument-404",
+      "ok": false,
+      "detail": "missing ErrorDocument 404 /404.html"
+    },
+    {
+      "id": "htaccess-no-force-https",
+      "ok": false,
+      "detail": "Force HTTPS rewrite still present"
+    },
+    {
+      "id": "htaccess-www-to-apex",
+      "ok": true,
+      "detail": "www→apex rule"
+    },
+    {
+      "id": "htaccess-cache-headers",
+      "ok": true,
+      "detail": "short HTML + long static Cache-Control"
+    },
+    {
+      "id": "no-http-or-slashless-internal",
+      "ok": false,
+      "detail": "relative internal (need https://koisoftware.com/.../): /servicios/software-a-la-medida/, /servicios/restaurantes-pos/, /servicios/automatizacion/, /servicios/asistentes-de-ia/, /servicios/software-a-la-medida/"
+    },
+    {
+      "id": "home-payload-under-budget",
+      "ok": false,
+      "detail": "2.10 MB / budget 1.50 MB (52 files)"
+    },
+    {
+      "id": "no-forced-reflow-ink-script",
+      "ok": false,
+      "detail": "ink getComputedStyle walk still in index.html"
+    },
+    {
+      "id": "self-hosted-woff2",
+      "ok": false,
+      "detail": "missing public/fonts/*.woff2 or still on Google Fonts"
+    }
+  ]
+}
