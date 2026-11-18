@@ -3,7 +3,7 @@
   "failed": 0,
   "passed": 17,
   "budgetBytes": 1572864,
-  "payloadBytes": 998680,
+  "payloadBytes": 1234680,
   "checks": [
     {
       "id": "no-render-blocking-font-css",
@@ -78,7 +78,7 @@
     {
       "id": "home-payload-under-budget",
       "ok": true,
-      "detail": "0.95 MB / budget 1.50 MB (52 files)"
+      "detail": "1.18 MB / budget 1.50 MB (52 files)"
     },
     {
       "id": "no-forced-reflow-ink-script",

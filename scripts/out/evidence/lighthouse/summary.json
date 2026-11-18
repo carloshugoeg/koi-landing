@@ -1,0 +1,42 @@
+{
+  "before-mobile": {
+    "perf": 73,
+    "LCP": "6.6\u00a0s",
+    "FCP": "2.5\u00a0s",
+    "SI": "3.1\u00a0s",
+    "CLS": "0",
+    "TBT": "0\u00a0ms",
+    "url": "https://koi-landing-dpe6dinlz-hugos-projects-3379fa36.vercel.app/?_vercel_share=T7FRnAYEoZlwEdJvCNiis74GY2QDAaJY",
+    "bytesKB": 3787
+  },
+  "before-desktop": {
+    "perf": 99,
+    "LCP": "1.0\u00a0s",
+    "FCP": "0.6\u00a0s",
+    "SI": "0.8\u00a0s",
+    "CLS": "0.003",
+    "TBT": "0\u00a0ms",
+    "url": "https://koi-landing-dpe6dinlz-hugos-projects-3379fa36.vercel.app/?_vercel_share=T7FRnAYEoZlwEdJvCNiis74GY2QDAaJY",
+    "bytesKB": 3792
+  },
+  "after-mobile": {
+    "perf": 78,
+    "LCP": "6.3\u00a0s",
+    "FCP": "0.9\u00a0s",
+    "SI": "1.9\u00a0s",
+    "CLS": "0",
+    "TBT": "0\u00a0ms",
+    "url": "https://koi-landing-rfljyb43j-hugos-projects-3379fa36.vercel.app/?_vercel_share=rNSYyMxID3Gt7W9uY7C7mwZiVKE5zA1s",
+    "bytesKB": 1570
+  },
+  "after-desktop": {
+    "perf": 100,
+    "LCP": "0.4\u00a0s",
+    "FCP": "0.2\u00a0s",
+    "SI": "0.5\u00a0s",
+    "CLS": "0",
+    "TBT": "0\u00a0ms",
+    "url": "https://koi-landing-rfljyb43j-hugos-projects-3379fa36.vercel.app/?_vercel_share=rNSYyMxID3Gt7W9uY7C7mwZiVKE5zA1s",
+    "bytesKB": 1686
+  }
+}
