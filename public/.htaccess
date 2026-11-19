@@ -3,25 +3,22 @@
 
 Options -MultiViews
 DirectoryIndex index.html
+ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # Force HTTPS
-  RewriteCond %{HTTPS} !=on
-  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-  # www → apex (keep path and query)
+  # www → apex (keep path and query). HTTPS is forced in hPanel.
   RewriteCond %{HTTP_HOST} ^www\.koisoftware\.com$ [NC]
   RewriteRule ^ https://koisoftware.com%{REQUEST_URI} [L,R=301]
 </IfModule>
 
-# Short cache for HTML; long cache for versioned static assets
+# Short cache for HTML; long cache for static assets (images, fonts, css, js)
 <IfModule mod_headers.c>
   <FilesMatch "\.(html)$">
     Header set Cache-Control "max-age=300, must-revalidate"
   </FilesMatch>
-  <FilesMatch "\.(webp|png|jpg|jpeg|gif|svg|ico|woff2|css|js)$">
-    Header set Cache-Control "public, max-age=604800"
+  <FilesMatch "\.(webp|avif|png|jpg|jpeg|gif|svg|ico|woff2|css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 </IfModule>

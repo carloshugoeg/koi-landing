@@ -26,3 +26,6 @@ dist-ssr
 # Python
 .venv/
 __pycache__/
+
+# Generated check/report artifacts (Lighthouse, screenshots, JSON dumps)
+scripts/out/
