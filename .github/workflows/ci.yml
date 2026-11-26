@@ -19,3 +19,5 @@ jobs:
       - run: npm run build
       - run: npm run perf:seo-check
       - run: npm run seo:copy-check
+      - run: npx --yes playwright@1.62.1 install --with-deps chromium
+      - run: npm run test:pjx-more-padding
