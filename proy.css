@@ -11,6 +11,10 @@
 .pjx ul{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;letter-spacing:.06em;color:#5E5A53}
 .pjx li::before{content:"·";color:#B8321E;margin-right:6px}
 .pjx .more{margin-top:14px;font-size:13px;letter-spacing:.08em}
+@media(min-width:601px){
+  .pj2>.pjx:nth-child(even) .more{margin-left:16%}
+  .pj2>.pjx:nth-child(odd) .more{margin-left:52%}
+}
 .pjx .more a{color:#B8321E;text-decoration:none;border-bottom:1px solid transparent}
 .pjx .more a:hover,.pjx .more a:focus-visible{border-color:#B8321E;outline:none}
 .pjx .go{display:inline-flex;align-items:center;gap:10px;margin-top:18px;font-size:14px;letter-spacing:.12em;color:#121212;border-bottom:1px solid #c9c1b1;padding-bottom:4px;transition:border-color .3s,gap .3s}
